@@ -1,0 +1,2 @@
+export const OPEN_ENDED_DURATION = 60;
+export const INTERVAL_INCREMENT = 1000;

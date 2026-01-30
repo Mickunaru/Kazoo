@@ -1,0 +1,52 @@
+.game-row {
+    padding: 5px 15px 5px 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 200px;
+    transition: ease-in, 0.3s;
+    cursor: pointer;
+}
+
+.game-row .options-container {
+    visibility: hidden;
+}
+
+.game-row:hover .options-container,
+.selected-game .options-container {
+    visibility: visible;
+}
+
+.hide-option {
+    visibility: visible;
+}
+
+.game-last-modified {
+    margin: 0;
+    font-size: 10px;
+}
+
+h4 {
+    margin: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info-container {
+    max-width: 200px;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+}
+
+.game-row-info {
+    display: flex;
+    gap: 10px;
+}

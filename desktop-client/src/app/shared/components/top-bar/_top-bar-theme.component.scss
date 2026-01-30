@@ -1,0 +1,19 @@
+@mixin color() {
+    // Use the CSS variables in your styles.
+    .left-bar {
+        background-color: var(--accent-color);
+    }
+
+    .bar {
+        background-color: var(--primary-color);
+    }
+
+    .top-bar-title {
+        color: var(--primary-accent-color);
+    }
+
+    // I wasn't able to find a way to set the color of the mat-toolbar title
+    .mat-toolbar.mat-primary {
+        --mat-toolbar-container-text-color: white !important;
+    }
+}

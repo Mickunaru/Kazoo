@@ -1,0 +1,23 @@
+<mat-toolbar class="header-bar" color="accent"><p class="title">Modificateurs de partie</p></mat-toolbar>
+<div class="item-display-container">
+    <ng-container *ngFor="let item of itemList">
+        <div class="item">
+            <p class="title power-up">{{ capitalizeFirstLetter(item.name) }}</p>
+            <span
+                matBadgeOverlap="true"
+                matBadge="{{ shopService.getAmount(item.name) }}"
+                matBadgePosition="below after"
+                matBadgeColor="accent"
+                matBadgeSize="large"
+            >
+                <img class="border" [src]="item?.imageUrl || imagePlaceholder" />
+            </span>
+            <p class="description">{{ getDescription(item.name) }}</p>
+
+            <button mat-raised-button (click)="shopService.buySelectedItem(item.id)" color="primary">
+                <p>{{ item.cost }}</p>
+                <mat-icon iconPositionEnd>paid</mat-icon>
+            </button>
+        </div>
+    </ng-container>
+</div>

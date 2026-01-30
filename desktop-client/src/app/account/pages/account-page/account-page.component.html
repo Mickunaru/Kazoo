@@ -1,0 +1,25 @@
+<div id="account-page">
+    <div>
+        <div
+            id="account-page-header">
+            <div id="title-elements">
+                <div id="avatar">
+                    <app-avatar-picker
+                        [selectedAvatar]="getAvatar()"
+                        [ownedAvatars]="shopService.ownedAvatars"
+                        (pickAvatarEmitter)="userConfigService.changeAvatar($event.id)"
+                        class="account-picker"></app-avatar-picker>
+                </div>
+                <div>
+                    <h1> Bienvenue {{userAuthService.curUser?.username}} </h1>
+                </div>
+            </div>
+
+        </div>
+        <div id="account-page-body">
+            <app-notification-box></app-notification-box>
+            <app-friend-box></app-friend-box>
+        </div>
+    </div>
+
+</div>

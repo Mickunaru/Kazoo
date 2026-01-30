@@ -1,0 +1,67 @@
+.player-controls {
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+    background-color: #333;
+    align-items: center;
+    justify-content: center;
+    background: #cfd8dc;
+    margin-left: 20px;
+    border-radius: 18px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-button {
+    margin: 18px 0;
+}
+
+.badge-container {
+    position: relative;
+    display: inline-block;
+}
+
+.toolbar-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    border: 2px solid #b0bec5;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.toolbar-button:hover .toolbar-icon {
+    border-color: #78909c;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.power-up-icon {
+    font-size: 35px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.toolbar-icon.disabled {
+    filter: saturate(20%) brightness(0.4) grayscale(100%);
+    opacity: 0.75;
+}
+
+.badge-container .checkmark {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    filter: none;
+}
+
+.badge-container {
+    position: relative;
+    display: inline-block;
+}
+
+.badge-container.disabled {
+    filter: grayscale(100%);
+}

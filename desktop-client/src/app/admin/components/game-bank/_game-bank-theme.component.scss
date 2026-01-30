@@ -1,0 +1,12 @@
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin color() {
+    // Use the CSS variables in your styles
+    .title-container {
+        color: var(--primary-contrast-color);
+        background-color: var(--almost-primary-color);
+    }
+
+    .games-container {
+        background-color: var(--gray);
+    }
+}

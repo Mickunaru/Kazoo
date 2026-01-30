@@ -1,0 +1,16 @@
+<div mat-dialog-title class="dialog-title">
+    <h2>Image de question</h2>
+    <button mat-icon-button aria-label="close dialog" class="dialog-close" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div class="container">
+    <img *ngIf="imagePreview; else notImage" [src]="imagePreview" alt="loading" />
+    <ng-template #notImage> Pas d'image encore </ng-template>
+    <div class="buttons">
+        <button *ngIf="imagePreview" mat-raised-button type="button" class="btn" color="primary" mat-dialog-close>Confirmer</button>
+        <button mat-raised-button type="button" class="btn" color="accent" color="primary" (click)="triggerFileInput()">Téléverser une image</button>
+        <button *ngIf="imagePreview" mat-raised-button type="button" class="btn" color="warn" (click)="removeFileInput()">Enlever l'image</button>
+        <input id="files" #fileInput style="display: none" type="file" accept=".png,image/png" (change)="onFileSelected($event)" />
+    </div>
+</div>

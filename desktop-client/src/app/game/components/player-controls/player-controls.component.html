@@ -1,0 +1,26 @@
+<div class="player-controls" *ngIf="roomService.arePowerUpsEnabled">
+    <mat-icon matTooltip="Modificateurs de partie" matTooltipPosition="above" class="power-up-icon">rocket</mat-icon>
+
+    <ng-container *ngIf="powerUps.length > 0">
+        <button
+            mat-button
+            [disabled]="powerUpService.disablePowerUps()"
+            *ngFor="let powerUp of powerUps; index as i"
+            (click)="handlePowerUp(powerUp.name)"
+            class="toolbar-button"
+            [matTooltip]="powerUp.name + ' - ' + powerUpsDescriptions[powerUp.name]"
+            matTooltipPosition="right"
+        >
+            <div
+                class="badge-container"
+                [class.disabled]="powerUpService.disablePowerUps()"
+                matBadge="{{ shopService.getAmount(powerUp.name) }}"
+                matBadgePosition="below after"
+                matBadgeColor="accent"
+            >
+                <img class="toolbar-icon" [class.disabled]="powerUpService.disablePowerUps()" src="{{ powerUp.imageUrl }}" />
+                <mat-icon class="checkmark" *ngIf="powerUpService.selectedPowerUp === powerUp.name">rocket_launch</mat-icon>
+            </div>
+        </button>
+    </ng-container>
+</div>

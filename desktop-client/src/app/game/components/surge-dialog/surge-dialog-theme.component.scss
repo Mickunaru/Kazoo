@@ -1,0 +1,9 @@
+@mixin color() {
+    .popup-content {
+        background-color: var(--primary-color);
+    }
+
+    .popup-button {
+        background-color: var(--accent-color);
+    }
+}

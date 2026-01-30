@@ -1,0 +1,93 @@
+<div class="whiteboard-wrapper">
+    <div id="control_container" class="whiteboard-controls mat-elevation-z8">
+        <button
+            mat-mini-fab
+            matTooltip="Couleur"
+            matTooltipPosition="below"
+            aria-label="Couleur"
+            [ngStyle]="{ 'background-color': inkColor }"
+            [disabled]="!canModify"
+            type="button"
+            class="color-picker-button"
+        >
+            <input role="button" [(colorPicker)]="inkColor" [style.background]="inkColor" aria-label="Couleur" class="color-picker-input" />
+        </button>
+
+        <button
+            mat-icon-button
+            (click)="toggleBrushSettings()"
+            matTooltip="Taille et opacité"
+            matTooltipPosition="below"
+            aria-label="Taille et opacité"
+            cdkOverlayOrigin
+            #trigger="cdkOverlayOrigin"
+            [disabled]="!canModify"
+            type="button"
+        >
+            <img alt="règle" src="assets/ruler-svgrepo-com.svg" height="20px" width="20px" />
+        </button>
+
+        <ng-template
+            cdkConnectedOverlay
+            [cdkConnectedOverlayOrigin]="trigger"
+            [cdkConnectedOverlayOpen]="brushSettingsOpen"
+            cdkConnectedOverlayWidth="200px"
+            (overlayOutsideClick)="onOverlayOutsideClick()"
+        >
+            <app-brush-settings-overlay />
+        </ng-template>
+
+        <hr class="tools-divider" />
+
+        <button
+            [ngClass]="selectedTool === toolType.BRUSH ? 'primary_border' : 'no_border'"
+            (click)="setSelection(toolType.BRUSH)"
+            matTooltip="Pinceau"
+            matTooltipPosition="below"
+            aria-label="Pinceau"
+            mat-icon-button
+            [disabled]="!canModify"
+            type="button"
+        >
+            <img alt="pinceau avec trait" src="assets/brush-2-svgrepo-com.svg" height="20px" width="20px" />
+        </button>
+
+        <button
+            mat-icon-button
+            [ngClass]="selectedTool === toolType.ERASER ? 'primary_border' : 'no_border'"
+            (click)="setSelection(toolType.ERASER)"
+            matTooltip="Effaceur"
+            matTooltipPosition="below"
+            aria-label="Effaceur"
+            [disabled]="!canModify"
+            type="button"
+        >
+            <img alt="Effaceur" src="assets/eraser-svgrepo-com.svg" height="20px" width="20px" />
+        </button>
+
+        <button
+            mat-mini-fab
+            (click)="undo()"
+            matTooltip="Annuler"
+            matTooltipPosition="below"
+            aria-label="Annuler"
+            [disabled]="!canModify"
+            type="button"
+        >
+            <mat-icon>undo</mat-icon>
+        </button>
+
+        <button
+            mat-mini-fab
+            (click)="clearBoard()"
+            matTooltip="Effacer"
+            matTooltipPosition="below"
+            aria-label="Effacer"
+            [disabled]="!canModify"
+            type="button"
+        >
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+    <div id="container" [ngClass]="getCursorClass()"></div>
+</div>

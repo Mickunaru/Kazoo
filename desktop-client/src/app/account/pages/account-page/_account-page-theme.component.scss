@@ -1,0 +1,10 @@
+@mixin color() {
+    #headerAccount {
+        background-color: var(--almost-primary-color);
+        color: var(--primary-contrast-color);
+    }
+
+    #backgroundAccount {
+        background-color: var(--gray);
+    }
+}

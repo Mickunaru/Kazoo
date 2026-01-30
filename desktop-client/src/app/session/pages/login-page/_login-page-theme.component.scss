@@ -1,0 +1,10 @@
+@mixin color() {
+    .title-screen {
+        background-color: var(--primary-color);
+        color: var(--primary-contrast-color);
+    }
+
+    .title-screen h1 {
+        color: var(--accent-color);
+    }
+}

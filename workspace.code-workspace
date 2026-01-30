@@ -1,0 +1,50 @@
+{
+    "folders": [
+        {
+            "name": "LOG3900-111",
+            "path": "."
+        },
+        {
+            "name": "desktop-client",
+            "path": "desktop-client"
+        },
+        {
+            "name": "mobile_client",
+            "path": "mobile_client"
+        },
+        {
+            "name": "server",
+            "path": "server"
+        },
+        {
+            "name": "common",
+            "path": "common"
+        }
+    ],
+    "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit",
+            "source.fixAll.eslint": "explicit"
+        },
+        "html.format.indentInnerHtml": true,
+        "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+        "eslint.workingDirectories": ["./desktop-client", "./server"],
+        "eslint.probe": ["javascript", "typescript", "html", "vue", "markdown"],
+        "eslint.validate": ["javascript", "typescript", "html", "vue", "markdown"]
+    },
+    "extensions": {
+        "recommendations": [
+            "esbenp.prettier-vscode",
+            "dbaeumer.vscode-eslint",
+            "Angular.ng-template",
+            "johnpapa.Angular2",
+            "PKief.material-icon-theme",
+            "ecmel.vscode-html-css",
+            "Gruntfuggly.todo-tree",
+            "streetsidesoftware.code-spell-checker",
+            "postman.postman-for-vscode"
+        ]
+    }
+}

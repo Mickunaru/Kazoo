@@ -1,0 +1,16 @@
+<div class="game-bank-bar">
+    <div class="title-container">
+        <h3>Banque de jeux</h3>
+        <div class="btn-container">
+            <button mat-raised-button color="accent" (click)="createNewGame()"><mat-icon>add</mat-icon> Créer</button>
+        </div>
+    </div>
+    <div class="games-container">
+        <ng-container *ngIf="gameLibraryService.games.length; else noGames">
+            <app-game-row (click)="gameLibraryService.isClicked = true" *ngFor="let game of gameLibraryService.games" [game]="game"></app-game-row>
+        </ng-container>
+        <ng-template #noGames>
+            <h3>Aucun jeu n'a été créé</h3>
+        </ng-template>
+    </div>
+</div>

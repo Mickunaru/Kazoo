@@ -1,0 +1,9 @@
+export const ROOM_NOT_FOUND_ERROR = 'This room does not exist';
+export const INVALID_USERNAME_ERROR = 'This username is invalid';
+export const ROOM_IS_CLOSED_ERROR = 'This room is closed';
+export const SESSION_EXPIRED_ERROR = 'Your room has expired. please reconnect';
+export const INVALID_ID_ERROR = 'Invalid ID';
+export const ROOM_CODE_GENERATION_ERROR = 'Could not generate a room code';
+export const INVALID_TOKEN_ERROR = 'Invalid token';
+export const INVALID_PASSWORD_ERROR = 'Invalid password';
+export const NOT_ENOUGH_QUESTIONS = 'There is not enough questions to start a random game';

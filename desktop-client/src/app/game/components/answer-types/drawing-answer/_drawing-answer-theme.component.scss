@@ -1,0 +1,5 @@
+@mixin color() {
+    #container {
+        border: 4px solid var(--accent-color);
+    }
+}

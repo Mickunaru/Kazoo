@@ -1,0 +1,16 @@
+const String usersEndpoint = 'users';
+const String usernameEndpoint = 'username';
+const String isSignedInEndpoint = 'is-signed-in';
+const String shopEndPoint = "shop";
+const String avatarEndpoint = "me/avatars";
+const String currencyEndpoint = "currency";
+const String waitingRoomEndpoint = 'waiting-room';
+const String gameLibraryEndpoint = 'games';
+const String randomGameEndpoint = 'random';
+const String gameAvailabilityEndPoint = 'availability';
+const String publicGamesEndpoint = 'public';
+const String isLockedEndpoint = 'is-locked';
+const String gameVisibilityEndpoint = 'visibility';
+const String s3Endpoint = 'bucket';
+const String customAvatarEndpoint = 'me/custom-avatars';
+const String fcmTokenEndpoint = 'me/fcm-tokens';

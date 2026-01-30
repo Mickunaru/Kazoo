@@ -1,0 +1,66 @@
+<mat-tab-group dynamicHeight animationDuration="200ms">
+    <mat-tab label="Mes salles">
+        <div class="list">
+            <div
+                *ngFor="let room of chatService.joinedRooms"
+                (click)="selectJoinedRoom(room)"
+                class="chat-joined-room room"
+                [ngClass]="{
+                    'chat-room-unread': room.unreadMessages
+                }"
+                [matBadge]="room.unreadMessages"
+                [matBadgeHidden]="!room.unreadMessages"
+                matBadgeColor="warn"
+                matBadgePosition="above before"
+                matBadgeOverlap="true"
+                matBadgeSize="medium"
+            >
+                <ng-container [ngSwitch]="room.type">
+                    <h4 *ngSwitchCase="chatRoomTypeEnum.TEAM_ROOM">Équipe: {{ room.name.split('#')[1] }}</h4>
+                    <h4 *ngSwitchCase="chatRoomTypeEnum.GAME_ROOM">Jeux: {{ room.name.split('#')[0] }}</h4>
+                    <h4 *ngSwitchDefault>{{ room.name }}</h4>
+                </ng-container>
+
+                <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()" *ngIf="room.type === chatRoomTypeEnum.CUSTOM">
+                    <mat-icon>more_horiz</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                    <button mat-menu-item (click)="leaveRoom(room.name, $event)">
+                        <mat-icon>logout</mat-icon>
+                        <span>Quitter</span>
+                    </button>
+                    <button mat-menu-item color="warn" *ngIf="room.creator === chatService.chatterName" (click)="deleteRoom(room.name, $event)">
+                        <mat-icon>delete_forever</mat-icon>
+                        <span>Supprimer</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Rejoindre">
+        <div class="section">
+            <mat-form-field subscriptSizing="dynamic">
+                <mat-label>Recherche</mat-label>
+                <input matInput [(ngModel)]="searchValue" [maxLength]="20" (keyup)="applyFilter()" placeholder="Nom ou créateur" autocomplete="off" />
+                <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue = ''; applyFilter()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <ng-container *ngIf="!displayedRooms.length">
+                <h4 *ngIf="allRooms.length; else noRooms">Aucune salle n'a ce nom</h4>
+                <ng-template #noRooms>
+                    <h4 class="no-room-text" *ngIf="!allRooms.length">Aucune salle disponible</h4>
+                </ng-template>
+            </ng-container>
+            <div class="list">
+                <div *ngFor="let room of displayedRooms" class="chat-joinable-room room">
+                    <h4 class="room-name">{{ room.name }}</h4>
+                    <h5 class="room-creator">{{ room.creator }}</h5>
+                    <button class="join-button" mat-icon-button color="primary" (click)="selectNewRoom(room)">
+                        <mat-icon>login</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

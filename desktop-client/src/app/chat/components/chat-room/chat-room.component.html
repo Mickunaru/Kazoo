@@ -1,0 +1,66 @@
+<div class="chat-room-space">
+    <mat-spinner *ngIf="isLoading" />
+    <div
+        class="message"
+        [ngClass]="{
+            'margin-top': i > 0 && chatService.messages[i - 1].author !== message.author
+        }"
+        *ngFor="let message of chatService.messages; let i = index"
+    >
+        <!--Img is before or after content depending if it sent or received-->
+        <img *ngIf="message.author !== chatService.chatterName" [src]="message.avatar" [alt]="message.author" />
+        <div
+            class="message-content"
+            [ngClass]="{
+                received: message.author !== chatService.chatterName,
+                sent: message.author === chatService.chatterName
+            }"
+        >
+            <div class="message-author">{{ message.author }}</div>
+            <div *ngIf="message.type === messageTypeEnum.TEXT">{{ message.text }}</div>
+            <app-audio-player
+                *ngIf="message.type === messageTypeEnum.SOUND"
+                [audioUrl]="message.text"
+                preload="metadata"
+                [duration]="message.duration"
+            ></app-audio-player>
+            <div class="message-time">{{ message.date | date: 'mediumTime' }}</div>
+        </div>
+        <img *ngIf="message.author === chatService.chatterName" [src]="message.avatar" [alt]="message.author" />
+    </div>
+    <div id="anchor"></div>
+</div>
+<form class="chat-pannel">
+    <div class="soundboard" *ngIf="chatService.currentRoom$.value?.hasSoundboard">
+        <mat-icon>volume_up</mat-icon>
+        <div class="sounds">
+            <ng-container *ngFor="let item of soundboardList">
+                <button mat-mini-fab class="soundboard-button" (click)="sendSoundboardMessage(item)" [matTooltip]="item.name">
+                    <mat-icon>{{ item.icon }}</mat-icon>
+                </button>
+            </ng-container>
+        </div>
+    </div>
+    <div class="inputs">
+        <app-audio-recorder #recorder />
+
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Message...</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                maxlength="200"
+                [(ngModel)]="inputText"
+                name="messageInput"
+                [ngModelOptions]="{ standalone: true }"
+                (keydown.enter)="sendMessage($event); recorder.sendAudio()"
+            ></textarea>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="accent" type="button" (click)="sendMessage(); recorder.sendAudio()">
+        Envoyer
+        <mat-icon>send</mat-icon>
+    </button>
+</form>

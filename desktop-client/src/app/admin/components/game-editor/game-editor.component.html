@@ -1,0 +1,97 @@
+<form [formGroup]="multipleChoiceForm" class="question-form" (ngSubmit)="validateGame()" *ngIf="gameLibraryService.isClicked; else displayDirectives">
+    <mat-card class="game-card">
+        <mat-form-field>
+            <mat-label>Nom</mat-label>
+            <input formControlName="title" #nameInput matInput name="title" maxlength="30" placeholder="Nom du jeu" />
+            <mat-hint>{{ nameInput.value.length }}/30</mat-hint>
+            <mat-error *ngIf="multipleChoiceForm.controls.title.hasError('required')">Le titre est obligatoire</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea
+                matInput
+                #descriptionInput
+                formControlName="description"
+                name="description"
+                cdkTextareaAutosize
+                maxlength="255"
+                placeholder="Description du jeu"
+            ></textarea>
+            <mat-hint>{{ descriptionInput.value.length }}/255</mat-hint>
+            <mat-error *ngIf="multipleChoiceForm.controls.description.hasError('required')">La description est obligatoire</mat-error>
+        </mat-form-field>
+        <div class="slider-container">
+            <label class="time-label">Temps par question:</label>
+            <div class="time-slider">
+                <mat-slider min="10" max="60" step="1">
+                    <input matSliderThumb formControlName="duration" #durationSlider />
+                </mat-slider>
+            </div>
+            <div class="time-box">
+                <label class="time-label">{{ durationSlider.value }} sec</label>
+            </div>
+        </div>
+        <div class="slider-container" *ngIf="canToggleGameAccessibility()">
+            <label class="time-label">Privé:</label>
+            <div class="time-slider">
+                <mat-slide-toggle color="primary" formControlName="private"></mat-slide-toggle>
+            </div>
+        </div>
+        <h3>Questions:</h3>
+        <mat-selection-list class="questions-list" formArrayName="questions" role="list">
+            <mat-accordion
+                cdkDropList
+                (cdkDropListDropped)="dropQuestion($event)"
+                #gameFormQuestionsList="cdkDropList"
+                [cdkDropListConnectedTo]="[questionBankList]"
+                [cdkDropListData]="multipleChoiceForm.controls.questions.controls"
+            >
+                <div class="drag-and-drop-field" *ngIf="multipleChoiceForm.controls.questions.controls.length === 0">
+                    Créer ou glisser-déposer de la banque de questions*
+                </div>
+                <app-question-form
+                    cdkDrag
+                    *ngFor="let form of multipleChoiceForm.controls.questions.controls; index as i"
+                    [questionFormInfo]="{ form, index: i }"
+                    [isQuestionBank]="false"
+                    (removeQuestionEmitter)="removeQuestion($event)"
+                ></app-question-form>
+            </mat-accordion>
+        </mat-selection-list>
+        <button
+            class="add-question-button"
+            type="button"
+            mat-flat-button
+            color="primary"
+            [matMenuTriggerFor]="menu"
+            (click)="$event.stopPropagation()"
+        >
+            <mat-icon>add</mat-icon>
+            Ajouter une question
+        </button>
+        <mat-menu #menu="matMenu" class="select-menu">
+            <button mat-menu-item type="button" (click)="addQuestion(questionType.MultiChoice)">
+                <mat-icon>interests</mat-icon>
+                <span>Choix multiples</span>
+            </button>
+            <button mat-menu-item type="button" (click)="addQuestion(questionType.OpenEnded)">
+                <mat-icon>reorder</mat-icon>
+                <span>Réponse longue</span>
+            </button>
+            <button mat-menu-item type="button" (click)="addQuestion(questionType.Drawing)">
+                <mat-icon>draw</mat-icon>
+                <span>Dessin</span>
+            </button>
+            <button mat-menu-item type="button" (click)="addQuestion(questionType.Estimation)">
+                <mat-icon>waves</mat-icon>
+                <span>Estimation</span>
+            </button>
+        </mat-menu>
+    </mat-card>
+    <button class="save-button" type="submit" color="accent" [disabled]="multipleChoiceForm.invalid" mat-raised-button>
+        <mat-icon>save</mat-icon>Sauvegarder
+    </button>
+</form>
+<ng-template #displayDirectives>
+    <p class="admin-directives">Veuillez sélectionner ou créer un jeu</p>
+</ng-template>

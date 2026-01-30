@@ -1,0 +1,8 @@
+<div class="image-container">
+    <img [src]="refreshedImageUrl" alt="Thumbnail" class="thumbnail" (click)="openDialog()" />
+</div>
+<div class="dialog-backdrop" *ngIf="isDialogOpen" (click)="closeDialog($event)">
+    <div class="dialog-content" (click)="$event.stopPropagation()">
+        <img [src]="refreshedImageUrl" alt="Full image" class="full-image" />
+    </div>
+</div>

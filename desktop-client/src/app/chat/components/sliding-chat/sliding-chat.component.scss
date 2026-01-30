@@ -1,0 +1,25 @@
+mat-sidenav-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+mat-sidenav-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.chat-toggle-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.chat-sidenav {
+    width: 300px;
+    max-width: 80vw;
+    background: white;
+    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.2);
+}

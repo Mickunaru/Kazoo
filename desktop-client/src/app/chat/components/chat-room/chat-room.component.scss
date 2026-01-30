@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+mat-spinner {
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.chat-room-space {
+    padding-top: 10px;
+    flex-grow: 1;
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-pannel {
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 10px 20px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    mat-form-field {
+        flex-grow: 1;
+    }
+    padding: 10px 10px 10px 0px;
+}
+
+.soundboard {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    gap: 5px;
+}
+
+.sounds {
+    padding: 5px;
+    height: fit-content;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+    border-radius: 10px;
+}
+
+.soundboard-button {
+    width: 30px;
+    height: 30px;
+}
+
+.chat-room-space * {
+    overflow-anchor: none;
+}
+
+#anchor {
+    overflow-anchor: auto;
+    min-height: 10px;
+}
+
+button {
+    width: 80%;
+}
+
+.message {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 12px;
+
+    img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+
+.message-content {
+    margin-bottom: 4px;
+    padding: 8px;
+    max-width: 190px;
+    overflow-wrap: break-word;
+}
+
+.message-author {
+    font-weight: bolder;
+    margin-bottom: 2px;
+    font-size: 18px;
+}
+
+.message-time {
+    font-size: 12px;
+    color: gray;
+    margin-top: 2px;
+}
+
+.received {
+    width: fit-content;
+    margin-right: auto;
+    margin-left: 5px;
+    border-radius: 10px 10px 10px 0;
+}
+
+.sent {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: 5px;
+    border-radius: 10px 10px 0 10px;
+}

@@ -1,0 +1,18 @@
+table {
+    width: 100%;
+    box-shadow: none;
+}
+
+.has-left {
+    text-decoration: line-through;
+}
+
+.mat-column-rank {
+    font-weight: bold;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    transform: none !important;
+    opacity: 1 !important;
+    margin: 0 0 0 5px !important;
+}

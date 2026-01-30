@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin color($theme) {
+    $gray-palette: map.get($theme, gray);
+
+    // Use the CSS variables in your styles
+    .game-info,
+    .question-component {
+        background-color: #{mat.get-color-from-palette($gray-palette, 900)};
+        color: var(--primary-contrast-color);
+    }
+}

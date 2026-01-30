@@ -1,0 +1,51 @@
+<mat-toolbar color="primary">
+    <div class="left-bar" (click)="showExitDialog(goToHome.bind(this))">
+        <img class="logo" src="assets/logo-white.svg" />
+        <span class="top-bar-title">Kazoo!</span>
+    </div>
+    <div class="padded-element">
+        <button id="shop" mat-flat-button color="primary" (click)="showExitDialog(goToShop.bind(this))">
+            <mat-icon>shopping_cart</mat-icon> Magasiner
+        </button>
+    </div>
+    <div class="separating-bar"></div>
+    <div class="padded-element">
+        <button id="admin" mat-flat-button color="primary" (click)="showExitDialog(goToAdmin.bind(this))">
+            <mat-icon>manage_accounts</mat-icon> Administrer
+        </button>
+    </div>
+    <div class="separating-bar"></div>
+    <div class="padded-element">
+        <button id="account" mat-flat-button color="primary" (click)="showExitDialog(goToAccount.bind(this))">
+            <mat-icon>person</mat-icon> Compte
+        </button>
+    </div>
+    <span class="spacer"></span>
+
+    <div class="padded-element">
+        <app-money-display></app-money-display>
+    </div>
+
+    <div class="padded-element">
+        <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>palette</mat-icon></button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="themeConfigService.changeAppTheme('default')">Thème défaut</button>
+            <ng-container *ngFor="let theme of this.shopService.ownedThemes">
+                <button mat-menu-item (click)="themeConfigService.changeAppTheme(theme.name)">{{ theme.name }}</button>
+            </ng-container>
+        </mat-menu>
+    </div>
+
+    <div class="padded-element">
+        <button
+            mat-icon-button
+            color="primary"
+            id="disconnect"
+            matTooltip="Se déconnecter"
+            matTooltipPosition="below"
+            (click)="showExitDialog(signOut.bind(this), true)"
+        >
+            <mat-icon color="warn">logout</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>

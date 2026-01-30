@@ -1,0 +1,7 @@
+@mixin color() {
+    .stats-container,
+    .leaderboard-container {
+        border: 1px solid var(--gray);
+        background-color: #efefef;
+    }
+}

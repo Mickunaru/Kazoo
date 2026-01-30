@@ -1,0 +1,33 @@
+.popup-content {
+    width: 250px;
+    height: 200px;
+    color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    font-size: 30px;
+}
+
+.popup-content p {
+    animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+.popup-button {
+    height: 35px;
+    width: 55px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}

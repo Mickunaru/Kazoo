@@ -1,0 +1,14 @@
+<mat-form-field style="width: 500px" hintLabel="{{ userOpenEndedInput.value.length }}/{{ maxTextAnswerLength }}">
+    <mat-label>Entrez votre réponse</mat-label>
+    <textarea
+        #userOpenEndedInput
+        matInput
+        [maxLength]="maxTextAnswerLength"
+        (input)="onInput(userOpenEndedInput.value)"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="3"
+        cdkAutosizeMaxRows="5"
+        [disabled]="!canAnswer"
+    ></textarea>
+</mat-form-field>

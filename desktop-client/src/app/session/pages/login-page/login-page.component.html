@@ -1,0 +1,30 @@
+<div class="title-screen">
+    <div class="title">
+        <img src="{{ logoPath }}" alt="Logo Kazoo" />
+        <h1>Kazoo!</h1>
+    </div>
+    <h3>Le jeu questionnaire de renommée internationale de l'équipe 111</h3>
+    <h5>Émilie Laverdière, Enrique Llerena, Gabriel Uriza, Michael Le, Yanis Pierre, Zachary Ouellet</h5>
+</div>
+<div class="login-modal-container">
+    <div *ngIf="isSignupForm; else loginBlock" class="modal-content">
+        <app-signup-modal></app-signup-modal>
+        <div class="switch-text">
+            <p>
+                Vous avez déjà un compte ?
+                <span class="link" (click)="isSignupForm = false">Connectez-vous</span>
+            </p>
+        </div>
+    </div>
+    <ng-template #loginBlock>
+        <div class="modal-content">
+            <app-login-modal></app-login-modal>
+            <div class="switch-text">
+                <p>
+                    Nouvel utilisateur ?
+                    <span class="link" (click)="isSignupForm = true">Inscrivez-vous</span>
+                </p>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,5 @@
+<div id="lock-container">
+    <button [disabled]="isDisabled" mat-fab color="primary" *ngIf="roomService.isGameMaster" class="lock" (click)="lockRoom()">
+        <mat-icon id="lock-icon">{{ roomService.isLocked ? 'lock' : 'lock_open' }}</mat-icon>
+    </button>
+</div>

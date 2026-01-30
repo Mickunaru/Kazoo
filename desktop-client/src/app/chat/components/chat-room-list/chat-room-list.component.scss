@@ -1,0 +1,118 @@
+:host {
+    height: 100%;
+    width: 100%;
+}
+
+mat-tab-group {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+mat-tab-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+::ng-deep .mat-mdc-tab-body-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    overflow-y: auto;
+}
+
+.section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.room {
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 10px 15px;
+}
+
+.chat-joined-room {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chat-joined-room:hover {
+    filter: brightness(105%);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease;
+}
+
+.chat-joined-room:active {
+    filter: brightness(95%);
+    transform: scale(0.98);
+}
+
+.chat-joined-room h4 {
+    margin: 0;
+    width: fit-content;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: visible;
+    flex-grow: 1;
+}
+
+.create-button {
+    justify-self: center;
+    margin: 0 10px;
+}
+
+mat-form-field {
+    padding: 10px;
+    padding-bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.chat-joinable-room {
+    height: min-content;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        'left-top right'
+        'left-bottom right';
+}
+
+.chat-joinable-room .room-name {
+    margin: 0;
+    grid-area: left-top;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.chat-joinable-room .room-creator {
+    margin: 0;
+    color: #747474;
+    grid-area: left-bottom;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.chat-joinable-room .join-button {
+    grid-area: right;
+}
+
+.no-room-text{
+    align-self: center;
+}

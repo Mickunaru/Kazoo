@@ -1,0 +1,18 @@
+<mat-form-field>
+    <mat-label>Nom de la salle</mat-label>
+    <input
+        autocomplete="off"
+        matInput
+        #name
+        maxlength="10"
+        placeholder="Ex. Chat trop cool"
+        (keydown.enter)="createRoom(name.value)"
+        required
+        (keypress)="blockHash($event)"
+    />
+    <mat-hint align="end">{{ name.value.length }} / 10</mat-hint>
+    <button matSuffix mat-icon-button (click)="createRoom(name.value)">
+        <mat-icon>arrow_forward</mat-icon>
+    </button>
+</mat-form-field>
+<p>{{ error }}</p>

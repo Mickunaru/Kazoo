@@ -1,0 +1,14 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.fixAll.eslint": "explicit"
+    },
+    "html.format.indentInnerHtml": true,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+    "eslint.workingDirectories": ["./desktop-client", "./mobile_client", "./server"],
+    "eslint.probe": ["javascript", "typescript", "html", "vue", "markdown"],
+    "eslint.validate": ["javascript", "typescript", "html", "vue", "markdown"],
+    "cmake.ignoreCMakeListsMissing": true
+}

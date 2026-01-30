@@ -1,0 +1,72 @@
+<div class="question-bank-bar">
+    <div class="title-container">
+        <h3>Banque de questions</h3>
+        <div class="btn-container">
+            <button mat-raised-button color="accent" [matMenuTriggerFor]="questionTypeSelection"><mat-icon>add</mat-icon>Créer</button>
+            <button mat-mini-fab [matMenuTriggerFor]="filterQuestionsMenu">
+                <mat-icon class="filter-icon">filter_alt</mat-icon>
+            </button>
+        </div>
+
+        <mat-menu #questionTypeSelection="matMenu" class="select-menu">
+            <button mat-menu-item (click)="addNewQuestionForm(questionType.MultiChoice)">
+                <mat-icon>interests</mat-icon>
+                <span>Choix multiples</span>
+            </button>
+            <button mat-menu-item (click)="addNewQuestionForm(questionType.OpenEnded)">
+                <mat-icon>reorder</mat-icon>
+                <span>Réponse longue</span>
+            </button>
+            <button mat-menu-item (click)="addNewQuestionForm(questionType.Drawing)">
+                <mat-icon>brush</mat-icon>
+                <span>Dessin</span>
+            </button>
+            <button mat-menu-item (click)="addNewQuestionForm(questionType.Estimation)">
+                <mat-icon>waves</mat-icon>
+                <span>Estimation</span>
+            </button>
+        </mat-menu>
+
+        <mat-menu #filterQuestionsMenu="matMenu" class="select-menu">
+            <button mat-menu-item (click)="displayQuestions(null)">
+                <mat-icon>star</mat-icon>
+                <span>Afficher toutes les questions</span>
+            </button>
+            <button mat-menu-item (click)="displayQuestions(questionType.MultiChoice)">
+                <mat-icon>interests</mat-icon>
+                <span>Afficher les questions à choix de réponses</span>
+            </button>
+            <button mat-menu-item (click)="displayQuestions(questionType.OpenEnded)">
+                <mat-icon>reorder</mat-icon>
+                <span>Afficher les questions à réponses longues</span>
+            </button>
+            <button mat-menu-item (click)="displayQuestions(questionType.Drawing)">
+                <mat-icon>brush</mat-icon>
+                <span>Afficher les questions à dessins</span>
+            </button>
+            <button mat-menu-item (click)="displayQuestions(questionType.Estimation)">
+                <mat-icon>waves</mat-icon>
+                <span>Afficher les questions à estimations</span>
+            </button>
+        </mat-menu>
+    </div>
+    <mat-accordion
+        class="question-list"
+        multi
+        cdkDropList
+        #questionBank="cdkDropList"
+        (cdkDropListDropped)="dropQuestion($event)"
+        [cdkDropListData]="questionForms"
+        [cdkDropListConnectedTo]="[questionsDropList]"
+    >
+        <app-question-form
+            cdkDrag
+            (saveQuestionEmitter)="saveQuestion($event)"
+            (removeQuestionEmitter)="removeQuestion($event)"
+            *ngFor="let question of questionForms; index as i"
+            [hidden]="!typeIsSelected(question.controls.type.value)"
+            [isQuestionBank]="true"
+            [questionFormInfo]="{ form: question, index: i }"
+        ></app-question-form>
+    </mat-accordion>
+</div>

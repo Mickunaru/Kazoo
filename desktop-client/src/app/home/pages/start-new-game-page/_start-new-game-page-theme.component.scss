@@ -1,0 +1,19 @@
+@mixin color() {
+    .game-list-card,
+    .game-information {
+        background: #e0e0e0;
+    }
+
+    .game-list-card button.selected {
+        background: #b0bec5;
+    }
+
+    .game-list-card button {
+        background: #eceff1;
+    }
+
+    .info-block,
+    .game-option {
+        background: #eceff1;
+    }
+}

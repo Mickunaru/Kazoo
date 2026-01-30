@@ -1,0 +1,42 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin color($theme) {
+    $gray: map.get($theme, gray);
+
+    // Define CSS variables in :root
+    :root {
+        --game-row-border-color: #{mat.get-color-from-palette($gray, 500)};
+        --game-row-hover-bg: #{mat.get-color-from-palette($gray, 300)};
+        --game-row-hover-color: black;
+        --game-row-public-color: #{mat.get-color-from-palette($gray, 200-contrast)};
+        --game-row-hidden-bg: #{mat.get-color-from-palette($gray, 50)};
+        --game-row-hidden-color: #{mat.get-color-from-palette($gray, 400)};
+        --game-row-title-color: black;
+    }
+
+    // Use the CSS variables in your styles
+    .game-row {
+        border-bottom: 1px solid var(--game-row-border-color);
+    }
+
+    .game-row:hover,
+    .selected-game {
+        background-color: var(--game-row-hover-bg);
+        color: var(--game-row-hover-color);
+    }
+
+    .public-game {
+        color: var(--game-row-public-color);
+    }
+
+    .hidden-game {
+        background-color: var(--game-row-hidden-bg);
+        color: var(--game-row-hidden-color);
+    }
+
+    .game-title-visible {
+        color: var(--game-row-title-color);
+    }
+}

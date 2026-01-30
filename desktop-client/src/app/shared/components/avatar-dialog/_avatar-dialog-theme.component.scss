@@ -1,0 +1,5 @@
+@mixin color() {
+    .avatar-grid > .avatar-container.selected {
+        border: 3px solid var(--almost-primary-color);
+    }
+}

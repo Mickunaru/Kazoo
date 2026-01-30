@@ -1,0 +1,36 @@
+<div class="page-title">
+    <h1>Créer une partie</h1>
+</div>
+
+<div class="flex-container">
+    <section class="game-selection">
+        <h2>Sélectionner un jeu</h2>
+        <div class="game-list-card" *ngIf="publicGames$ | async; let publicGames">
+            <p *ngIf="!publicGames">Pas assez de questions pour le mode d'élimination rapide</p>
+            <button
+                [disabled]="(this.hasEnoughQuestions$ | async) !== true"
+                mat-stroked-button
+                [class.selected]="selectedGame === null && isGameSelected"
+                class="game-option random"
+                (click)="showGameDetails(null)"
+            >
+                <mat-icon>casino</mat-icon>
+                Mode élimination rapide
+            </button>
+            <p *ngIf="publicGames.length <= 0" class="games-unavailable-text">Aucun jeu n'est disponible</p>
+            <button
+                mat-stroked-button
+                *ngFor="let game of publicGames; trackBy: trackGameListkByGameId"
+                (click)="showGameDetails(game)"
+                [class.selected]="selectedGame === game"
+                class="game-option"
+            >
+                {{ game.title }}
+            </button>
+        </div>
+    </section>
+
+    <section *ngIf="isGameSelected" class="game-details">
+        <app-game-starter [selectedGame]="selectedGame" (unselect)="unselectGame()"></app-game-starter>
+    </section>
+</div>

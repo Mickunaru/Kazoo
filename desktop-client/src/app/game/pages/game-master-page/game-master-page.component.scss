@@ -1,0 +1,115 @@
+.game-master-view {
+    min-height: calc(100vh - 108px);
+    align-content: center;
+    position: relative;
+}
+
+.end-game-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.game-master-container {
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
+
+.interactive-player-list {
+    min-width: 250px;
+}
+
+.organizer-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.game-master-timer {
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 30px;
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+#timer-options-container {
+    display: flex;
+    gap: 20px;
+}
+
+#timer-options-container button,
+#next-question-button {
+    border-radius: 10px;
+    padding: 30px;
+    font-size: 18px;
+    text-align: center;
+}
+
+#timer-options-container button,
+#next-question-button {
+    width: 100%;
+}
+
+.exit-btn {
+    width: 300px;
+    border-radius: 100px;
+    padding: 20px 0px;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
+
+h1 {
+    margin: 0;
+}
+
+.center-title {
+    display: flex;
+    justify-content: center;
+}
+
+.top-left {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 20px;
+}
+
+.top-right {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    gap: 16px;
+}
+
+.image-wrapper {
+    max-width: 100px;
+    max-height: 100px;
+}

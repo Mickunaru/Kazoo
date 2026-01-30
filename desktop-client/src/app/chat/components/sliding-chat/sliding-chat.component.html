@@ -1,0 +1,12 @@
+<mat-sidenav-container>
+    <mat-sidenav-content id="side-content">
+        <ng-content></ng-content>
+        <button mat-fab color="accent" class="chat-toggle-btn" (click)="this.toggleChat()" *ngIf="!chatService.isPoppedOut">
+            <mat-icon>chat</mat-icon>
+        </button>
+    </mat-sidenav-content>
+
+    <mat-sidenav #chatSidenav mode="side" position="end" class="chat-sidenav" [opened]="chatService.isChatVisible && !chatService.isPoppedOut">
+        <app-chat></app-chat>
+    </mat-sidenav>
+</mat-sidenav-container>

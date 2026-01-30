@@ -1,0 +1,119 @@
+@use '@angular/material' as mat;
+
+//Styling structure inspired by https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_col-s
+body * {
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+}
+
+body::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.title-screen,
+.login-modal-container {
+    width: 100%;
+}
+
+.title-screen {
+    float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.title h1 {
+    letter-spacing: 1rem;
+    margin: 10px;
+    font-weight: bolder;
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+.title img {
+    height: 5rem;
+}
+
+.login-modal-container {
+    display: flex;
+    height: 100%;
+}
+
+.modal-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+.switch-text {
+    margin-top: 10px;
+}
+
+.link {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.link:hover {
+    text-decoration: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .body {
+        height: 100%;
+    }
+
+    .login-modal-container {
+        width: 40%;
+    }
+
+    .title-screen {
+        width: 60%;
+        height: 100%;
+    }
+
+    .title {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex-grow: 1;
+        width: 100%;
+    }
+
+    .title h1 {
+        margin: 0;
+        letter-spacing: 2rem;
+        font-size: 5rem;
+        text-transform: uppercase;
+        display: block;
+    }
+
+    .title img {
+        flex-grow: 1;
+        max-width: 90%;
+        object-fit: contain;
+    }
+}

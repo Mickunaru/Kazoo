@@ -1,0 +1,48 @@
+<div class="game-pannel">
+    <div class="game-info-container">
+        <div class="game-info">
+            <app-standard-game-timer />
+        </div>
+
+        <ng-container *ngIf="powerUpService.currentPowerUps.size > 0">
+            <div class="power-up-display" *ngFor="let powerUp of powerUpService.currentPowerUps">
+                <img class="toolbar-icon" src="{{ POWER_UP_IMAGE_URL[powerUp] }}" />
+            </div>
+        </ng-container>
+
+        <div class="game-info">
+            <div class="score-value">{{ this.gameStateService.playerScore }} pts</div>
+        </div>
+    </div>
+    <div class="question-component">
+        <div class="main-question-info">
+            <h2>{{ this.gameStateService.currentQuestion.text }}</h2>
+            <span id="question-pts">{{ this.gameStateService.currentQuestion.points }} points</span>
+        </div>
+        <app-image-viewer
+            *ngIf="gameStateService.currentQuestion?.imageUrl"
+            [imageUrl]="gameStateService.currentQuestion.imageUrl ?? ''"
+        ></app-image-viewer>
+    </div>
+    <form (submit)="submit(); form.reset()" #form [ngClass]="{ 'drawing-question-form': gameStateService.questionType === questionType.Drawing }">
+        <div [ngSwitch]="gameStateService.questionType">
+            <app-multiple-choice-answer *ngSwitchCase="questionType.MultiChoice" [canAnswer]="canAnswer()" />
+            <app-open-ended-answer *ngSwitchCase="questionType.OpenEnded" [canAnswer]="canAnswer()" />
+            <app-drawing-answer *ngSwitchCase="questionType.Drawing" #drawingAnswer [canModify]="canAnswer()" />
+            <app-estimation-answer *ngSwitchCase="questionType.Estimation" [canAnswer]="canAnswer()"></app-estimation-answer>
+        </div>
+
+        <button
+            mat-raised-button
+            color="accent"
+            type="submit"
+            [disabled]="!canSubmit()"
+            *ngIf="gameStateService.questionType !== questionType.Drawing; else drawingQuestionSubmitButton"
+        >
+            Soumettre la réponse<mat-icon>check</mat-icon>
+        </button>
+        <ng-template #drawingQuestionSubmitButton>
+            <button mat-raised-button color="accent" type="submit" [disabled]="!canSubmit()"><mat-icon>check</mat-icon>Soumettre la réponse</button>
+        </ng-template>
+    </form>
+</div>

@@ -1,0 +1,26 @@
+.slider-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+}
+
+.slider {
+    flex-grow: 1;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+h3 {
+    margin: 0;
+}

@@ -1,0 +1,8 @@
+<div class="brush-settings-overlay">
+    <div>
+        <div>Taille: {{ konvaService.brushSize }}</div>
+        <mat-slider thumbLabel min="1" max="100" step="1">
+            <input matSliderThumb [(ngModel)]="konvaService.brushSize" />
+        </mat-slider>
+    </div>
+</div>

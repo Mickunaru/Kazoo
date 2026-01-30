@@ -1,0 +1,23 @@
+#account-page {
+    display: flex;
+    justify-content: center;
+}
+
+#account-page-header {
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+
+#account-page-body {
+    display: flex;
+    flex-direction: row;
+}
+
+#title-elements {
+    display: flex;
+    align-items: center;
+}
+
+#avatar {
+    padding-right: 20px;
+}

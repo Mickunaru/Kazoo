@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mat-column-status {
+    min-width: 90px;
+}
+
+.mat-column-username {
+    font-weight: bold;
+}
+
+.player-username-cell.player-left {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+
+.mat-mdc-header-cell,
+.mat-mdc-cell {
+    padding: 0px 8px;
+}

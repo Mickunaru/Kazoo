@@ -1,0 +1,7 @@
+<div>
+    <audio #audioRef [src]="audioUrl" [preload]="preload" (timeupdate)="handleProgressChange()" (ended)="handleEnd()"></audio>
+    <button mat-icon-button (click)="togglePlayPause()">
+        <mat-icon>{{ isPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
+    </button>
+    <mat-progress-spinner [mode]="!duration && isPlaying ? 'indeterminate' : 'determinate'" [value]="progress" diameter="48" />
+</div>

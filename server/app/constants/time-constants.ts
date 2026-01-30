@@ -1,0 +1,7 @@
+export const PANIC_INCREMENT = 250;
+export const MULTI_CHOICE_PANIC_LIMIT = 10;
+export const OPEN_ENDED_PANIC_LIMIT = 20;
+export const NEXT_QUESTION_COUNTDOWN = 3;
+export const START_GAME_COUNTDOWN = 5;
+export const QUESTION_DURATION_MIN = 10;
+export const QUESTION_DURATION_MAX = 100;

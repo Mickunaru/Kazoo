@@ -1,0 +1,120 @@
+.game-pannel {
+    height: 100%;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+}
+
+// Timer n score
+.game-info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.game-info {
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    min-width: 100px;
+}
+
+.score-value {
+    padding: 0 8px;
+}
+
+// Question box
+.question-component {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+}
+
+.main-question-info {
+    display: flex;
+    flex-direction: column;
+}
+
+// Mult choice container
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+form.drawing-question-form {
+    flex-direction: row;
+    justify-content: center;
+}
+
+form > button {
+    max-width: 100%;
+    width: 100px;
+    height: 95px;
+}
+
+form.drawing-question-form > button {
+    display: flex;
+    flex-direction: column;
+
+    mat-icon {
+        margin: 0;
+    }
+}
+
+app-open-ended-answer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes pulseGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 5px #ffcdd2;
+        opacity: 0.92;
+    }
+    50% {
+        box-shadow:
+            0 0 20px #ffcdd2,
+            0 0 40px #ffcdd2;
+        opacity: 1;
+    }
+}
+
+.toolbar-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    border: 3px solid #263238;
+    animation: pulseGlow 1.5s infinite alternate;
+}
+
+.power-up-display {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+#question-pts {
+    font-size: 12px;
+}

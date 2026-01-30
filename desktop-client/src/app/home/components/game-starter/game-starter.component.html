@@ -1,0 +1,57 @@
+<div class="game-information">
+    <h2>{{ selectedGame?.title ?? 'Élimination Rapide' }}</h2>
+
+    <ng-container *ngIf="selectedGame">
+        <h4>Description</h4>
+        <div class="info-block">
+            <p>{{ selectedGame.description }}</p>
+        </div>
+    </ng-container>
+
+    <form class="configuration-container" [formGroup]="gameConfigForm" (submit)="startGame()">
+        <div class="control-row">
+            <div class="slider" *ngIf="!selectedGame">
+                <div class="slider-label-container">
+                    <label class="example-name-label">Nombre de questions</label>
+                    <label class="slider-value-label">{{ slider.value }}</label>
+                </div>
+                <mat-slider max="20" min="5" step="1">
+                    <input matSliderThumb min="5" formControlName="questionCount" #slider />
+                </mat-slider>
+            </div>
+
+            <mat-form-field *ngIf="selectedGame">
+                <mat-label>Mode</mat-label>
+                <mat-select formControlName="gameMode">
+                    <mat-option [value]="GameModeType.CLASSIC">{{GameModeName.CLASSIC}}</mat-option>
+                    <mat-option [value]="GameModeType.TEAM">{{GameModeName.TEAM}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="slider">
+                <div class="slider-label-container">
+                    <label class="example-name-label">Prix d'entrée</label>
+                    <label class="slider-value-label">{{ slider.value }}</label>
+                </div>
+                <mat-slider max="200" min="0" step="10">
+                    <input matSliderThumb formControlName="entryPrice" #slider />
+                </mat-slider>
+            </div>
+
+            <mat-checkbox formControlName="isFriendsOnly">Ouvert seulement aux amis</mat-checkbox>
+
+            <mat-checkbox formControlName="arePowerUpsEnabled">Activer les modificateurs de partie</mat-checkbox>
+            <mat-checkbox formControlName="hasSoundboard">Activer le tableau de son</mat-checkbox>
+        </div>
+
+        <button [disabled]="gameConfigForm.invalid || isProcessing" mat-raised-button class="start-button" color="accent">Lancer une partie</button>
+    </form>
+
+    <div *ngIf="selectedGame" class="info-block">
+        <h4>Questionnaire</h4>
+        <h4>Temps de réponse: {{ selectedGame.duration }}</h4>
+        <p *ngFor="let question of selectedGame.questions">
+            {{ question.text }}
+        </p>
+    </div>
+</div>

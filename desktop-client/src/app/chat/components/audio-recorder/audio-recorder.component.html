@@ -1,0 +1,9 @@
+<div class="mic" *ngIf="!localUrl">
+    <button mat-icon-button [color]="isRecording ? 'warn' : 'primary'" (click)="toggleRecording()" [class.recording]="isRecording">
+        <mat-icon>mic</mat-icon>
+    </button>
+    <mat-progress-spinner mode="determinate" [value]="progress" diameter="48" color="warn" />
+</div>
+
+<app-audio-player *ngIf="localUrl" [audioUrl]="localUrl" preload="auto" [duration]="duration"></app-audio-player>
+<button mat-icon-button color="warn" *ngIf="localUrl" (click)="delete()"><mat-icon>delete_forever</mat-icon></button>

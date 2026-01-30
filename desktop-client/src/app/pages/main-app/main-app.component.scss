@@ -1,0 +1,6 @@
+:host {
+    height: 100%;
+}
+main {
+    height: calc(100% - 64px); //height of the top bar
+}

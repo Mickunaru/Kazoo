@@ -1,0 +1,19 @@
+<div class="players-drawings-pop-up-header">
+    <h1 mat-dialog-title>
+        Par <b>{{ playersDrawings[currentIndex].name }}</b>
+    </h1>
+    <button mat-icon-button (click)="closePopUp()"><mat-icon>close</mat-icon></button>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="drawing-container">
+    <img
+        class="player-drawing"
+        [src]="s3BucketUrl + playersDrawings[currentIndex].awsKey"
+        [alt]="'dessin de ' + playersDrawings[currentIndex].name"
+    />
+</div>
+<div mat-dialog-actions class="players-drawings-button-container">
+    <button mat-icon-button (click)="goToPrevious()" [disabled]="currentIndex === 0"><mat-icon>arrow_back</mat-icon></button>
+    <p>{{ currentIndex + 1 }}/{{ playersDrawings.length }}</p>
+    <button mat-icon-button (click)="goToNext()" [disabled]="currentIndex === playersDrawings.length - 1"><mat-icon>arrow_forward</mat-icon></button>
+</div>

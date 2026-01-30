@@ -1,0 +1,15 @@
+@mixin color() {
+    // Use the CSS variables in your styles
+    .cancel-icon {
+        color: var(--warn-color);
+        padding: 0px;
+    }
+
+    .participant {
+        background-color: var(--primary-light-color);
+    }
+
+    .player-avatar-container {
+        border: 2px solid var(--primary-color);
+    }
+}

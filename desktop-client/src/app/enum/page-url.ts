@@ -1,0 +1,15 @@
+export enum PageUrl {
+    APP_PREFIX = 'app',
+    GAME = 'game',
+    WAITING_ROOM = 'waiting-room',
+    GAME_MASTER = 'game-master',
+    RESULTS = 'results',
+    ADMIN = 'admin',
+    HOME = 'home',
+    NEW_GAME = 'new-game',
+    LOGIN = 'login',
+    AUTH = 'auth',
+    CHAT = 'chat',
+    SHOP = 'shop',
+    ACCOUNT = 'account',
+}

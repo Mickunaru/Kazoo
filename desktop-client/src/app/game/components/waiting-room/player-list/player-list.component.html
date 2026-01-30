@@ -1,0 +1,23 @@
+<div class="participant-title">
+    <h2>Participants :</h2>
+</div>
+<div class="participant-space">
+    <div class="participant" *ngFor="let player of participantService.participants" [style.backgroundColor]="teamService.getTeam(player.teamName)?.color">
+        <span class="player-avatar-container">
+            <img [src]="player.imageUrl" class="player-avatar" />
+        </span>
+        <span class="name-container">
+            <span class="player-username" [ngClass]="{ 'has-left': player.hasLeft }">{{ player.username }}</span>
+        </span>
+        <button
+            mat-icon-button
+            type="button"
+            matTooltip="Retirer le participant"
+            *ngIf="roomService.isGameMaster && !player.hasLeft && !timerService.isTimerActivated"
+            [disabled]="timerService.isTimerActivated"
+            (click)="participantService.removeParticipant(player.username)"
+        >
+            <mat-icon class="cancel-icon">cancel</mat-icon>
+        </button>
+    </div>
+</div>

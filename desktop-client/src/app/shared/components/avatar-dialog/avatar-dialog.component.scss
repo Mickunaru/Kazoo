@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+
+.avatar-grid {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.avatar-container {
+    border: 3px solid transparent;
+    display: flex;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-container img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    cursor: pointer;
+}

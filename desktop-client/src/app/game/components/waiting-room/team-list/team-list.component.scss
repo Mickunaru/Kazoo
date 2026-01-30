@@ -1,0 +1,30 @@
+.team-list {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.team-box {
+    padding: 10px;
+    border-radius: 5px;
+    gap: 5px;
+    display: flex;
+    height: 36px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.team-title {
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    text-align: left;
+}
+
+.team-title > h2 {
+    padding-left: 30px;
+}
+
+.add-team-icon {
+    cursor: pointer;
+}

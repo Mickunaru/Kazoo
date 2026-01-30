@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>
+    <ng-container *ngIf="roomService.gameMode === gameModeEnum.TEAM; else ShowName"> Réponse </ng-container>
+    <ng-template #ShowName>
+        Réponse de: <b>{{ answers[answerIndex].name }}</b>
+    </ng-template>
+</h1>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="answer">
+    <p class="text-answer" *ngIf="this.gameStateService.questionType !== questionTypeEnum.Drawing; else DrawingAnswer">
+        {{ answers[answerIndex].answer }}
+    </p>
+    <ng-template #DrawingAnswer>
+        <img class="player-drawing" [src]="s3BucketUrl + answers[answerIndex].answer" [alt]="'dessin de ' + answers[answerIndex].name" />
+    </ng-template>
+</div>
+<div mat-dialog-actions>
+    <h3>Note:</h3>
+    <button mat-stroked-button (click)="saveScore(0)">0%</button>
+    <button mat-stroked-button (click)="saveScore(0.5)">50%</button>
+    <button mat-stroked-button (click)="saveScore(1)">100%</button>
+</div>

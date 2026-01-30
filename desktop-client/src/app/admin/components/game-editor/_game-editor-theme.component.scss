@@ -1,0 +1,13 @@
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin color() {
+    // Use the CSS variables in your styles
+    .form-header button {
+        background-color: var(--gray);
+        color: black;
+    }
+
+    .drag-and-drop-field {
+        border: 3px solid var(--accent-light-color);
+        color: var(black);
+    }
+}

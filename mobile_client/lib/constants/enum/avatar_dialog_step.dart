@@ -1,0 +1,1 @@
+enum AvatarDialogStep { pickAvatar, drawAvatar }

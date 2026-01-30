@@ -1,0 +1,41 @@
+<mat-card class="cards" id="backgroundAccount">
+    <mat-card-title class="title" id="headerAccount">
+        <h3>
+            <mat-icon>notifications</mat-icon>
+            Notifications
+        </h3>
+    </mat-card-title>
+    <mat-card-content class="scroll"
+        *ngIf="notificationService.notificationList.length;else message">
+        <mat-card class="padding-top"
+            *ngFor="let notification of notificationService.notificationList; trackBy: trackById">
+            <mat-card-content>
+                <div>
+                    <mat-icon class="padding-right">person</mat-icon>
+                    <span class="paragraph">
+                        {{notification.senderUsername}}
+                        vous a envoyé une demande d'amitié!
+                    </span>
+                </div>
+                <div class="response-btn">
+                    <button mat-raised-button color="primary"
+                        (click)="notificationService.respondToFriendRequest(notification.senderUsername, true, notification.id)">
+                        <mat-icon>check</mat-icon>
+                        Accepter
+                    </button>
+                    <button mat-raised-button
+                        (click)="notificationService.respondToFriendRequest(notification.senderUsername, false, notification.id)">
+                        <mat-icon>close</mat-icon>
+                        Ignorer
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-card-content>
+
+    <ng-template #message>
+        <mat-card-content class="paragraph align-text">
+            Vous n'avez pas de nouvelles notifications.
+        </mat-card-content>
+    </ng-template>
+</mat-card>

@@ -1,0 +1,26 @@
+<div
+    (click)="onSelect()"
+    class="game-row"
+    [ngClass]="{ 'public-game': !game.isHidden && !isSelected, 'hidden-game': game.isHidden && !isSelected, 'selected-game': isSelected }"
+>
+    <div class="info-container">
+        <h4 [ngClass]="{ 'game-title-visible': !game.isHidden }">{{ game.title }}</h4>
+        <div class="game-row-info">
+            <p class="game-last-modified">Créé par: {{ game.creator }}</p>
+            <p class="game-last-modified">Modifié le: {{ game.lastModification.toLocaleDateString() }}</p>
+        </div>
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+        <mat-icon>more_horiz</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="after">
+        <button mat-menu-item (click)="toggleVisibility()">
+            <mat-icon>{{ game.isHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
+            <span>{{ game.isHidden ? 'Montrer' : 'Cacher' }}</span>
+        </button>
+        <button mat-menu-item (click)="deleteGame()">
+            <mat-icon>delete</mat-icon>
+            <span>Supprimer</span>
+        </button>
+    </mat-menu>
+</div>

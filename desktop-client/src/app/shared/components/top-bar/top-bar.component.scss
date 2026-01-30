@@ -1,0 +1,50 @@
+/* styles.css or styles.scss */
+mat-toolbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding-left: 0;
+    height: 64px;
+    z-index: 2;
+}
+
+.left-bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    min-width: 250px;
+    cursor: pointer;
+}
+
+.top-bar-title {
+    font-size: 35px;
+    font-weight: bold;
+    transition: all 0.5s;
+}
+
+.logo {
+    height: 70%;
+    transition: all 0.7s;
+}
+
+.left-bar:hover .title {
+    transform: scale(1.1);
+}
+
+.left-bar:hover .logo {
+    transform: rotate(360deg) scale(1.2);
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.separating-bar {
+    border-left: 2px solid #ccc;
+    height: 24px;
+}
+
+.padded-element {
+    padding: 0 10px;
+}

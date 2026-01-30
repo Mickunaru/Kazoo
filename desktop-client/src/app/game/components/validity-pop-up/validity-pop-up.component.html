@@ -1,0 +1,45 @@
+<div class="page-filter">
+    <div class="pop-up">
+        <div
+            *ngIf="percentageGiven !== null; else multipleChoiceAnswer"
+            class="percentage-background"
+            [ngClass]="{                
+                'good-answer-color': percentageGiven === 100,
+                'middle-answer-color': percentageGiven === 50,
+                'bad-answer-color': percentageGiven === 0,                
+            }"
+        >
+            <span>{{ percentageGiven }}%</span>
+        </div>
+        <ng-template #multipleChoiceAnswer>
+            <mat-icon *ngIf="pointsGained; else wrongAnswerIcon" class="validity-icon good-answer">check_circle</mat-icon>
+            <ng-template #wrongAnswerIcon>
+                <mat-icon *ngIf="!isEliminated" class="validity-icon bad-answer">cancel</mat-icon>
+            </ng-template>
+        </ng-template>
+
+        <h1 ngClass='eliminated-answer-color' *ngIf="isEliminated; else notEliminated" >Réponse</h1>
+        <ng-template #notEliminated>
+            <h1 [ngClass]="isPartial ? 'partial-answer-display' : pointsGained ? 'good-answer-display' : 'bad-answer-display'">
+                {{ isPartial ? 'Réponse partielle' : pointsGained ? 'Bonne réponse!' : 'Mauvaise réponse' }}
+            </h1>
+        </ng-template>
+
+        <div class="points">
+            <p *ngIf="pointsGained">+ {{ pointsGained }} points</p>
+            <p class="bonus" *ngIf="bonusPointsGained">+ {{ bonusPointsGained }} points BONUS</p>
+        </div>
+
+        <div *ngIf="percentageGiven === null">
+            <h2 *ngIf="correctAnswers.length <= 1; else multipleAwnswersBlock">La bonne réponse est:</h2>
+            <ng-template #multipleAwnswersBlock>
+                <h2>Les bonnes réponses sont:</h2>
+            </ng-template>
+            <p class="answer" *ngFor="let answer of correctAnswers">{{ answer }}</p>
+        </div>
+
+        <button [ngClass]="{ 'ok-button': true, correct: pointsGained && !isPartial, 'partial-correct': isPartial }" (click)="closePopup()">
+            Ok
+        </button>
+    </div>
+</div>

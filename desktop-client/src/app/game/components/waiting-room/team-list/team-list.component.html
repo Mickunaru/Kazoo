@@ -1,0 +1,27 @@
+<ng-container *ngIf="roomService.gameMode === gameModeEnum.TEAM">
+    <div class="team-title">
+        <h2>Équipes :</h2>
+    </div>
+    <div class="team-list">
+        <mat-form-field *ngIf="!roomService.isGameMaster">
+            <mat-label>Créer une équipe</mat-label>
+            <input
+                [disabled]="isDisabled"
+                [(ngModel)]="teamName"
+                matInput
+                [maxLength]="20"
+                [minlength]="1"
+                pattern=".*\S+.*"
+                (keyup.enter)="createTeam(this.teamName)"
+                (keypress)="blockHash($event)"
+            />
+            <button (click)="createTeam(this.teamName)" [disabled]="disableTeamCreation()" matSuffix mat-icon-button>
+                <mat-icon class="add-team-icon">add</mat-icon>
+            </button>
+            <mat-hint>Équipes: {{ teamService.teams.length }}/{{ teamNumberLimitConstant }}</mat-hint>
+        </mat-form-field>
+        <div class="team-box" [style.backgroundColor]="team.color" *ngFor="let team of teamService.teams" (click)="selectTeam(team.name)">
+            <mat-icon>{{ team.icon }}</mat-icon> {{ team.name }}
+        </div>
+    </div>
+</ng-container>

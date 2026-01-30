@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-card {
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+mat-form-field {
+    padding: 5px;
+    min-width: 300px;
+}
+
+.slider-container {
+    min-width: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    .time-label {
+        padding: 8px;
+    }
+
+    .time-slider {
+        display: flex;
+        max-width: 900px;
+        width: 100%;
+
+        mat-slider {
+            max-width: 900px;
+            width: 100%;
+        }
+    }
+
+    .time-box {
+        display: inline-block;
+        padding: 8px;
+        min-width: 65px;
+    }
+}
+
+.add-question-button {
+    width: 100%;
+    max-width: 300px;
+    min-height: 50px;
+    align-self: center;
+}
+
+.save-button {
+    margin-top: 15px;
+    min-width: 350px;
+    max-width: 400px;
+    width: 100%;
+    min-height: 50px;
+}
+
+.admin-directives {
+    font-size: 16px;
+    font-style: italic;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.drag-and-drop-field {
+    border-style: dashed;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.questions-list {
+    min-width: fit-content;
+}
+
+::ng-deep .mat-mdc-menu-panel.select-menu {
+    max-width: none !important;
+}

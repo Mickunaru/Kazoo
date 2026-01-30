@@ -1,0 +1,51 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin color($theme) {
+    $gray: map.get($theme, gray);
+
+    // Define any styles affected by the theme.
+    .leaderboard-player-row {
+        border-bottom: 1px solid mat.get-color-from-palette($gray, 300);
+    }
+
+    th.mat-sort-header-sorted {
+        color: black;
+    }
+
+    table.mat-mdc-table .mat-mdc-header-cell {
+        color: var(--primary-contrast-color);
+        background-color: var(--primary-color);
+    }
+
+    .mat-sort-header-arrow {
+        color: --primary-color;
+    }
+
+    .mat-mdc-row.first-place, .mat-mdc-row.first-place:hover {
+        background-color: rgba(255, 215, 0, 1) !important;
+    }
+
+    .mat-mdc-row.second-place, .mat-mdc-row.second-place:hover {
+        background-color: rgba(192, 192, 192, 1) !important;
+    }
+
+    .mat-mdc-row.third-place, .mat-mdc-row.third-place:hover {
+        background-color: rgba(206, 137, 70, 1) !important;
+    }
+
+    .leaderboard-column, .leaderboard-column:hover {
+        background-color: --primary-light-color !important;
+    }
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5em;
+}
+table tr:last-child td /*To remove the last border*/
+{
+  border-bottom:0 solid
+}
+}

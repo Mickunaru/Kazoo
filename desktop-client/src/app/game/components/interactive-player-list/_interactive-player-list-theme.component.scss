@@ -1,0 +1,17 @@
+@mixin color() {
+    button#first.clicked,
+    button#second.clicked,
+    button#third.clicked,
+    button#fourth.clicked {
+        background-color: var(--accent-color);
+        color: var(--accent-contrast-color);
+    }
+
+    button#first,
+    button#second,
+    button#third,
+    button#fourth {
+        background-color: var(--gray);
+        color: var(black);
+    }
+}

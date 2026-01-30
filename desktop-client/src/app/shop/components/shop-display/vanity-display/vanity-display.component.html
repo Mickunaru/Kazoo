@@ -1,0 +1,19 @@
+<mat-toolbar class="header-bar" color="accent"><p class="title">Thèmes & Avatars</p></mat-toolbar>
+<div class="item-display-container">
+    <ng-container *ngFor="let item of itemList">
+        <div class="item">
+            <p class="title">{{ item.name }}</p>
+            <img [ngClass]="borderClass(item)" [src]="item?.imageUrl || imagePlaceholder" />
+            <button
+                mat-raised-button
+                class="buy-vanity-button"
+                [disabled]="isSelected(item.id) || shopService.isOwned(item.name)"
+                (click)="shopService.buySelectedItem(item.id)"
+                color="primary"
+            >
+                <p>{{ item.cost }}</p>
+                <mat-icon iconPositionEnd>paid</mat-icon>
+            </button>
+        </div>
+    </ng-container>
+</div>

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "791568657647",
+    "project_id": "kazoo-dd077",
+    "storage_bucket": "kazoo-dd077.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791568657647:android:5ec7c748134ec8b064ff1a",
+        "android_client_info": {
+          "package_name": "com.example.mobile_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791568657647-de48fj466v7p79mvqu075b2qv7mdju47.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobile_client",
+            "certificate_hash": "07a6f85d36b2f94e77d78605d40fed4ebfc81b01"
+          }
+        },
+        {
+          "client_id": "791568657647-sb1blich612f46ks5j9jtpp32bg5h75h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgApPtCLrdg3dLvPAeu6avZ0ue4NgdUMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791568657647-sb1blich612f46ks5j9jtpp32bg5h75h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "791568657647-r1tepttmjk0jnnkkukji128oovk2nr6q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mobileClient"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

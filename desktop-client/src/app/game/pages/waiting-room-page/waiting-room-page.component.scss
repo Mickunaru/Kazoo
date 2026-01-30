@@ -1,0 +1,115 @@
+@keyframes hover {
+    0% {
+        transform: translate(0px, 4px);
+    }
+    50% {
+        transform: translate(0px, -4px);
+    }
+    100% {
+        transform: translate(0px, 4px);
+    }
+}
+
+body {
+    height: calc(100% - 64px);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    background-image: url(/assets/bubbles.svg);
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    animation: hover 4s;
+    animation-iteration-count: infinite;
+    padding: 0.05%;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#leftWaitingView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 64px);
+    width: 100%;
+}
+
+#leftWaitingView > button {
+    width: 100%;
+    margin-top: 5%;
+    height: 50px;
+    font-size: 20px;
+}
+
+#top-left-container {
+    height: 35%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+app-player-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+app-team-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+app-countdown-popup {
+    width: 100%;
+    height: 100%;
+    font-size: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+app-start-game-button {
+    width: 30%;
+    height: 100%;
+}
+
+#room-key {
+    font-size: 40px;
+    font-weight: bold;
+    margin-left: 10px;
+    border-radius: 5px;
+    height: 55px;
+    text-align: center;
+}
+
+#button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+::ng-deep .mdc-dialog__surface {
+    border-radius: 10px !important;
+}
+
+#participant-list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,27 @@
+@mixin color() {
+    .chat-box-title {
+        background-color: var(--accent-color);
+        color: var(--accent-contrast-color);
+    }
+
+    .sent,
+    .chat-pannel {
+        background-color: var(--accent-light-color);
+    }
+
+    .received {
+        background-color: var(--gray);
+    }
+
+    .chat-joined-room {
+        background-color: var(--accent-light-color);
+    }
+
+    .chat-joinable-room {
+        background-color: var(--primary-light-color);
+    }
+
+    .chat-room-unread {
+        border: 5px solid var(--warn-color);
+    }
+}

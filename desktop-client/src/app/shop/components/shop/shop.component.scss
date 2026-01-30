@@ -1,0 +1,28 @@
+#powerUps-display {
+    height: 35%;
+    width: 85%;
+}
+
+#vanity-display {
+    height: 45%;
+    width: 85%;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+}
+
+#vanity-header {
+    margin-top: 1vh;
+}
+
+button {
+    width: 85%;
+    height: 5% !important;
+}
+
+p {
+    margin: 0;
+    font-size: 2vh;
+}

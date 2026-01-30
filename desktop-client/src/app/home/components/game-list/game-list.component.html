@@ -1,0 +1,22 @@
+<h1 class="active-game-title" *ngIf="homeLobbyService.activeGames.length >= 1">Jeux Disponibles</h1>
+<div class="game-list-container">
+    <div class="game option-box" *ngFor="let activeGame of homeLobbyService.activeGames" (click)="joinGame(activeGame.roomId)">
+        <div>
+            <h2 class="game-id">Jeu {{ getGameType(activeGame) }} #{{ activeGame.roomId }}</h2>
+            <h5 class="game-title">{{ activeGame.gameTitle }}</h5>
+        </div>
+        <div>
+            Nombre de joueurs: <b>{{ activeGame.playerCount }}</b>
+        </div>
+        <div>
+            État de la salle: <b>{{ getRoomStateName(activeGame) }}</b>
+        </div>
+        <div *ngIf="activeGame.gameConfig.gameId === null">
+            Nombre de questions: <b>{{ activeGame.gameConfig.questionCount }}</b>
+        </div>
+        <div *ngIf="activeGame.gameConfig.entryPrice > 0">
+            Prix d'entrée: <b>{{ activeGame.gameConfig.entryPrice }}</b>
+        </div>
+        <b *ngIf="activeGame.gameConfig.arePowerUpsEnabled">Avec Modificateurs de Partie</b>
+    </div>
+</div>

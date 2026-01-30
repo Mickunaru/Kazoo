@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+    $gray-palette: map.get($theme, gray);
+    #participant-list {
+        background-color: var(--gray);
+    }
+    .participant-title {
+        background-color: var(--primary-color);
+        color: var(--primary-contrast-color);
+    }
+
+    .game-master-timer {
+        border: 1.5px solid var(--primary-color);
+    }
+
+    app-interactive-player-list {
+        border-right: 1px solid var(--game-master-player-list-border);
+        color: white;
+        background-color: mat.get-color-from-palette($gray-palette, 900);
+    }
+
+    .game-master-timer {
+        background-color: #{mat.get-color-from-palette($gray-palette, 900)};
+        color: var(--primary-contrast-color);
+    }
+}

@@ -1,0 +1,17 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    padding: 15px;
+}
+
+mat-form-field {
+    width: 100%;
+    margin: 10px;
+}
+
+p {
+    font-size: larger;
+}

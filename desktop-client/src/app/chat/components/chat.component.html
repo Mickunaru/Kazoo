@@ -1,0 +1,19 @@
+<div class="chat-box-title">
+    <button mat-icon-button *ngIf="currentPage" (click)="back()" class="left-button">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button *ngIf="!currentPage" mat-icon-button (click)="openCreateRoom()" class="left-button"><mat-icon>add</mat-icon></button>
+
+    <h2 [ngSwitch]="chatRoomType" class="title">
+        <ng-container *ngSwitchCase="chatRoomTypeEnum.TEAM_ROOM">Équipe: {{ title.split('#')[1] }}</ng-container>
+        <ng-container *ngSwitchCase="chatRoomTypeEnum.GAME_ROOM">Jeux: {{ title.split('#')[0] }}</ng-container>
+        <ng-container *ngSwitchDefault>{{ title }}</ng-container>
+    </h2>
+    <button mat-icon-button *ngIf="!chatService.isWindow" (click)="chatService.openPopout()" class="popout-button">
+        <mat-icon>open_in_new</mat-icon>
+    </button>
+</div>
+
+<app-chat-room-list *ngIf="!currentPage" (roomSelected)="roomSelected($event)" (createRoom)="openCreateRoom()" />
+<app-chat-room *ngIf="currentPage === 'room'" />
+<app-create-chat-room *ngIf="currentPage === 'create'" />

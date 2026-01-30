@@ -1,0 +1,25 @@
+@mixin color() {
+    .answer-choices {
+        background-color: var(--gray);
+        color: black;
+
+        &.clicked {
+            background-color: var(--accent-color);
+            color: var(--accent-contrast-color);
+        }
+
+        &:disabled {
+            background-color: #e0e0e0;
+            color: #b0b0b0;
+        }
+
+        &.show-answer-color-wrong {
+            color:black;
+        }
+
+        &.show-answer-color {
+            background-color: #43a047;
+            color:black
+        }
+    }
+}

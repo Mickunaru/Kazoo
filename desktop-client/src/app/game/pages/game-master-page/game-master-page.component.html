@@ -1,0 +1,78 @@
+<div class="game-master-view">
+    <div class="game-master-container">
+        <div class="interactive-player-list">
+            <h1>Liste des joueurs</h1>
+            <app-interactive-player-list></app-interactive-player-list>
+        </div>
+        <div class="organizer-controls">
+            <div class="game-master-timer">
+                <div class="top-left">Question {{ gameStateService.currentQuestionIndex }} / {{ gameStateService.questionsLength }}</div>
+                <div class="top-right">{{ timerService.time }} s</div>
+                <div class="center-content">
+                    <div style="font-size: 30px">{{ gameStateService.currentQuestion.text }}</div>
+                    <div class="image-wrapper">
+                        <app-image-viewer
+                            *ngIf="gameStateService.currentQuestion?.imageUrl"
+                            [imageUrl]="gameStateService.currentQuestion.imageUrl ?? ''"
+                        />
+                    </div>
+                    <ng-container [ngSwitch]="gameStateService.questionType">
+                        <app-multiple-choice-answer
+                            *ngSwitchCase="questionTypeEnum.MultiChoice"
+                            [canAnswer]="false"
+                            [showAnswers]="true"
+                        ></app-multiple-choice-answer>
+                        <h5 *ngSwitchCase="questionTypeEnum.Estimation">
+                            Réponse {{ gameStateService.currentQuestion.answer }} ± {{ gameStateService.currentQuestion.precision }}
+                        </h5>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div id="timer-options-container">
+                    <button
+                        mat-raised-button
+                        [disabled]="!isAnswerDuration"
+                        id="timer-stop-option"
+                        color="primary"
+                        *ngIf="timerService.isTimerActivated; else resumeTimer"
+                        (click)="timerService.pauseCountdown()"
+                    >
+                        <mat-icon>pause</mat-icon> Arrêter
+                    </button>
+                    <ng-template #resumeTimer>
+                        <button
+                            mat-raised-button
+                            [disabled]="!isAnswerDuration"
+                            id="timer-resume-option"
+                            color="primary"
+                            (click)="timerService.resumeCountdown()"
+                        >
+                            <mat-icon>play_arrow</mat-icon> Reprendre
+                        </button>
+                    </ng-template>
+                    <button mat-raised-button [disabled]="disablePanicTimer()" (click)="timerService.enterPanicMode()" color="primary">
+                        <mat-icon>speed</mat-icon> Mode panique
+                    </button>
+                </div>
+                <button
+                    mat-raised-button
+                    [disabled]="isAnswerDuration || isProcessing"
+                    id="next-question-button"
+                    color="accent"
+                    (click)="loadNextQuestion()"
+                >
+                    {{
+                        this.gameStateService.currentQuestionIndex === this.gameStateService.questionsLength
+                            ? 'Afficher les résultats'
+                            : 'Prochaine question'
+                    }}&nbsp;
+                    <mat-icon> navigate_next </mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <button mat-raised-button color="warn" (click)="showEndGameDialog()" class="end-game-button">
+        <mat-icon> close </mat-icon>Mettre fin à la partie
+    </button>
+</div>

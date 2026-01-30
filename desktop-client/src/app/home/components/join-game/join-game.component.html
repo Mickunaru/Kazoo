@@ -1,0 +1,14 @@
+<form [formGroup]="idForm" (submit)="joinGame()">
+    <mat-form-field id="code-field">
+        <mat-label>Code</mat-label>
+        <input maxlength="4" matInput formControlName="id" />
+        <mat-error *ngIf="idForm.controls.id.errors?.required">{{ GameJoinErrorMessageEnum.CODE_REQUIS }}</mat-error>
+        <mat-error *ngIf="idForm.controls.id.errors?.roomDoesNotExist">{{ GameJoinErrorMessageEnum.DELETED }}</mat-error>
+        <mat-error *ngIf="idForm.controls.id.errors?.roomIsLocked">{{ GameJoinErrorMessageEnum.LOCKED }}</mat-error>
+        <mat-error *ngIf="idForm.controls.id.errors?.roomAccessLocked">{{ GameJoinErrorMessageEnum.HIDDEN }}</mat-error>
+        <mat-error *ngIf="idForm.controls.id.errors?.notEnoughMoney">{{ GameJoinErrorMessageEnum.NOT_ENOUGH_MONEY }}</mat-error>
+        <mat-error *ngIf="idForm.controls.id.errors?.maxPlayerCountReached">{{ GameJoinErrorMessageEnum.MAX_PLAYER_COUNT_REACHED }}</mat-error>
+        <mat-error *ngIf="idForm.controls.id.errors?.otherError">{{ GameJoinErrorMessageEnum.UNKOWN }}</mat-error>
+    </mat-form-field>
+    <button id="join-button" mat-button mat-raised-button color="accent" [disabled]="isProcessing" type="submit">Rejoindre</button>
+</form>

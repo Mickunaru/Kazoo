@@ -1,0 +1,49 @@
+.cards {
+    border-radius: 10px;
+    color: black;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 60vh;
+    height: 70vh;
+}
+
+.title {
+    text-align: center;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.scroll {
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.response-btn {
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.paragraph {
+    justify-content: center;
+    text-wrap: wrap;
+    font-size: medium;
+}
+
+.align-text {
+    text-align: center;
+    flex-grow: 1;
+    padding-top: 20px;
+}
+
+.padding-right {
+    padding-right: 10px;
+}
+
+.padding-top {
+    margin-top: 10px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

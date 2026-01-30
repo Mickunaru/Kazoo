@@ -1,0 +1,64 @@
+.cards {
+    border-radius: 10px;
+    color: black;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 60vh;
+    height: 70vh;
+    margin-left: 10px;
+}
+
+.title {
+    text-align: center;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.card-list {
+    overflow-y: scroll;
+}
+
+.center-div {
+    display: flex;
+    align-items: center;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.content-center {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-field {
+    width: 38vh;
+    padding-top: 10px;
+}
+
+.margin-left-5 {
+    margin-left: 5px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.center-text {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.friend-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

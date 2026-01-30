@@ -1,0 +1,20 @@
+<div>
+<button
+  type="button"
+  (click)="openAvatarDialog()"
+  class="avatar-picker"
+>
+  <img *ngIf="selectedAvatar; else defaultIcon" [src]="selectedAvatar" class="avatar-preview" />
+  <ng-template #defaultIcon>
+    <mat-icon>add</mat-icon>
+  </ng-template>
+</button>
+<button 
+*ngIf="userAuthService.curUser"
+class = "change-avatar-button"
+type="button"
+  mat-button
+  mat-raised-button
+  color="primary"
+  (click)="openAvatarDialog()"><mat-icon>edit</mat-icon> Modifier l'avatar</button>
+</div>

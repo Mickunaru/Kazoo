@@ -1,0 +1,15 @@
+<app-game-bank *ngIf="showGameBank" />
+<div class="page-center">
+    <div class="toggle-buttons">
+        <button color="primary" mat-flat-button class="tongue-button-left" (click)="showGameBank = !showGameBank">
+            <mat-icon>{{ showGameBank ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        </button>
+        <button color="primary" mat-flat-button class="tongue-button-right" (click)="showQuestionBank = !showQuestionBank">
+            <mat-icon>{{ showQuestionBank ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+        </button>
+    </div>
+
+    <app-game-editor />
+</div>
+
+<app-questions-bank *ngIf="showQuestionBank" />

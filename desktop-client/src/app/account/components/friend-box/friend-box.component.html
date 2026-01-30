@@ -1,0 +1,82 @@
+ <mat-card class="cards" id="backgroundAccount">
+    <mat-card-title class="title" id="headerAccount">
+        <h3>
+            <mat-icon>group</mat-icon>
+            Liste d'amis
+        </h3>
+    </mat-card-title>
+    <mat-card-content id="backgroundAccount">
+        <div class="content-center" [formGroup]="form">
+            <mat-form-field
+                class="form-field">
+                <mat-label>
+                    <mat-icon>search</mat-icon> Recherche
+                </mat-label>
+                <input matInput
+                    [matAutocomplete]="auto"
+                    formControlName="username"
+                    class="flex-grow-1" />
+                <mat-error
+                    *ngIf="form.controls['username'].hasError('isFriend')">
+                    Vous êtes déjà des amis
+                </mat-error>
+                <mat-error
+                    *ngIf="form.controls['username'].hasError('invalidUsername')">
+                    Entrez un nom d'utilisateur valide
+                </mat-error>
+                <mat-error
+                    *ngIf="form.controls['username'].hasError('waitingForAnswer')">
+                    Vous avez déjà envoyé une demande à cet utilisateur
+                </mat-error>
+                <mat-error
+                    *ngIf="form.controls['username'].hasError('seeNotification')">
+                    Vous avez une demande de cet utilisateur.
+                </mat-error>
+                <mat-error
+                    *ngIf="form.controls['username'].hasError('isEmpty')">
+                    Veuillez entrer le nom d'un utilisateur
+                </mat-error>
+                <mat-autocomplete #auto="matAutocomplete"
+                    (optionSelected)="selectedUser($event)">
+                    <mat-option
+                        *ngFor="let user of filteredNotFriendList | async; trackBy: trackByUsername"
+                        [value]="user">
+                        {{ user }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <button mat-icon-button class="margin-left-5"
+                (click)="sendFriendRequest()">
+                <mat-icon>group_add</mat-icon>
+            </button>
+        </div>
+    </mat-card-content>
+    <mat-card-content class="card-list" id="backgroundAccount">
+
+        <div
+            *ngIf="friendService.friendList.length; else emptyFriendLists">
+            <mat-card
+                *ngFor="let username of friendService.friendList; trackBy: trackByUsername"
+                class="margin-top-10">
+                <mat-card-content>
+                    <div class="friend-card">
+                        <div>
+                            {{ username }}
+                        </div>
+                        <div>
+                            <button mat-icon-button
+                                (click)="friendService.removeFriendEvent(username)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <ng-template #emptyFriendLists>
+            <div class="center-text">
+                Ajoute des amis!
+            </div>
+        </ng-template>
+    </mat-card-content>
+</mat-card>

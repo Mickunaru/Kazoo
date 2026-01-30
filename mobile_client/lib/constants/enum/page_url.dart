@@ -1,0 +1,16 @@
+enum PageUrl {
+  app,
+  game,
+  waitingRoom,
+  gameMaster,
+  results,
+  admin,
+  home,
+  newGame,
+  login,
+  signup,
+  auth,
+  chat,
+  shop,
+  account,
+}

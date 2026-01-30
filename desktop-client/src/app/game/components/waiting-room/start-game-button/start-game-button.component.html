@@ -1,0 +1,3 @@
+<button [disabled]="isDisabled" id="start-button" mat-flat-button color="primary" (click)="startGame()" *ngIf="roomService.isGameMaster">
+    Commencer la partie
+</button>

@@ -1,0 +1,1 @@
+export const MINIMUM_RANDOM_GAME_QUESTION_COUNT = 5;

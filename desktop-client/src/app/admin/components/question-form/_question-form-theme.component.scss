@@ -1,0 +1,15 @@
+@mixin color() {
+    // Define CSS variables in :root
+    :root {
+        --question-form-last-modification-color: rgba(0, 0, 0, 0.5);
+    }
+
+    // Use the CSS variables in your styles
+    .last-modification-label {
+        color: var(--question-form-last-modification-color);
+    }
+
+    .warn-question {
+        color: var(--warn-color);
+    }
+}

@@ -1,0 +1,53 @@
+.game-information {
+    border: 1px solid;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+}
+
+.info-block {
+    border-radius: 10px;
+    width: 800px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.start-button {
+    margin: 5px;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.configuration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 800px;
+    padding: 10px;
+}
+
+.slider {
+    max-width: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.slider-label-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 10px 0;
+    max-width: 250px;
+}
+
+.slider-value-label {
+    font-weight: 600;
+}
+
+.control-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 5px;
+}

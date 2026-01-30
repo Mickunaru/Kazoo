@@ -1,0 +1,46 @@
+.question-bank-bar {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    height: 100%;
+}
+
+.title-container {
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 20px;
+}
+
+.btn-container button {
+    border-radius: 20px;
+}
+
+mat-accordion {
+    padding: 5px;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.filter-icon {
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+::ng-deep .mat-mdc-menu-panel.select-menu {
+    max-width: none !important;
+}
+
+[hidden] {
+    display: none !important;
+}

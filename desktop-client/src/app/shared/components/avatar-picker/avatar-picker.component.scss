@@ -1,0 +1,32 @@
+.avatar-picker {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: #d6d6d6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0;
+}
+
+.avatar-preview {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    width: 100%;
+}
+
+
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .change-avatar-button {
+    margin: 5px;
+  }

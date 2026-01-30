@@ -1,0 +1,1 @@
+enum S3Crud { put, get, delete }

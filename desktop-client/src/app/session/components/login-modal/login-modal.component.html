@@ -1,0 +1,34 @@
+<mat-card class="login-modal-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title class="login-modal-title">Connectez vous!</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="login()">
+            <mat-form-field appearance="outline" class="login-modal-field">
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input formControlName="username" matInput placeholder="John_Doe" type="text" maxlength="24" />
+                <mat-icon matPrefix>person</mat-icon>
+                <mat-error *ngIf="form.get('username')!.hasError('required')">Entrez votre nom d'utilisateur</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="login-modal-field">
+                <mat-label>Mot de passe</mat-label>
+                <input formControlName="password" matInput [type]="hidePassword() ? 'password' : 'text'" type="password" maxlength="24" />
+                <button
+                    type="button"
+                    mat-icon-button
+                    matSuffix
+                    (mouseup)="toggleShow($event)"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePassword()"
+                >
+                    <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-icon matPrefix>password</mat-icon>
+                <mat-error *ngIf="form.get('password')!.hasError('required')">Veuillez entrer un mot de passe</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="accent" type="submit" class="login-modal-connect-btn" [disabled]="!form.valid || isLoading">
+                Se connecter
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

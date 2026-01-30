@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Choisissez un avatar</h2>
+<mat-dialog-content>
+    <div class="avatar-grid">
+        <div *ngFor="let avatar of avatarPreset" class="avatar-container" [ngClass]="{ selected: avatar.name === selectedAvatar?.name }">
+            <img [src]="avatar.imageUrl" (click)="selectAvatar(avatar)" alt="Avatar" />
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div *ngIf="userAuthService.curUser?.username">
+        <button mat-button type="button" class="btn" (click)="triggerFileInput()">Téléverser un PNG</button>
+        <input id="files" #fileInput style="display: none" accept=".png,image/png" type="file" (change)="onFileSelected($event)" />
+    </div>
+    <button mat-button mat-dialog-close>Annuler</button>
+    <button mat-button (click)="onConfirm()" cdkFocusInitial>Confirmer</button>
+</mat-dialog-actions>

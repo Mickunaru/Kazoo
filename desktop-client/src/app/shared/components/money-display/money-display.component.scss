@@ -1,0 +1,16 @@
+#money-quantity {
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 0 5px;
+}
+
+#money-quantity mat-icon {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

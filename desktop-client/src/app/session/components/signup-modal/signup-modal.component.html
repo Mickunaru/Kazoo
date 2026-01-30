@@ -1,0 +1,85 @@
+<mat-card class="signup-modal-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title class="signup-modal-title">Joignez-nous!</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="signUp()">
+            <div class="avatar-form-field">
+                <div class="avatar-picker-container">
+                    <app-avatar-picker (pickAvatarEmitter)="pickAvatar($event.imageUrl)" />
+                </div>
+                <div *ngIf="!form.get('avatar')?.value">Choisissez votre avatar</div>
+            </div>
+            <mat-form-field appearance="outline" class="signup-modal-field">
+                <mat-label>Nom utilisateur</mat-label>
+                <input formControlName="username" matInput placeholder="Kazoo" [maxlength]="12" />
+                <mat-icon matPrefix>person</mat-icon>
+                <mat-error *ngIf="form.get('username')!.hasError('required')">Entrez un nom d'utilisateur</mat-error>
+                <mat-error *ngIf="form.get('username')!.hasError('minlength'); else usernamePatternMessage">Entrez au moins 5 charactères</mat-error>
+                <ng-template #usernamePatternMessage>
+                    <mat-error *ngIf="form.get('username')!.hasError('pattern')"
+                        >Utilisez uniquement des lettres, des chiffres et des underscores (_)</mat-error
+                    >
+                </ng-template>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="signup-modal-field">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput placeholder="example@gmail.com" type="email" maxlength="320" />
+                <mat-icon matPrefix>mail</mat-icon>
+                <mat-error *ngIf="form.get('email')!.hasError('required')">Entrez un email</mat-error>
+                <mat-error *ngIf="form.get('email')!.hasError('strictEmail')">Entrez un email valide</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="signup-modal-field">
+                <mat-label>Mot de passe</mat-label>
+                <input formControlName="password" matInput [type]="hidePassword() ? 'password' : 'text'" type="password" maxlength="24" />
+                <button
+                    type="button"
+                    mat-icon-button
+                    matSuffix
+                    (click)="toggleShowPassword($event)"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePassword()"
+                >
+                    <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-icon matPrefix>password</mat-icon>
+                <mat-error *ngIf="form.get('password')!.hasError('required'); else passwordStrength">Entrez un mot de passe</mat-error>
+                <ng-template #passwordStrength>
+                    <mat-error *ngIf="form.get('password')!.hasError('passwordStrength'); else noSpaces" class="long-error-message"
+                        >Le mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule, un chiffre et un caractère
+                        spécial.</mat-error
+                    >
+                </ng-template>
+                <ng-template #noSpaces>
+                    <mat-error *ngIf="form.get('password')!.hasError('noSpaces')">Le mot de passe ne doit pas contenir d'espace.</mat-error>
+                </ng-template>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="signup-modal-field">
+                <mat-label>Confirmer le mot de passe</mat-label>
+                <input
+                    formControlName="confirmPassword"
+                    matInput
+                    [type]="hideConfirmPassword() ? 'password' : 'text'"
+                    type="password"
+                    maxlength="24"
+                />
+                <button
+                    type="button"
+                    mat-icon-button
+                    matSuffix
+                    (click)="toggleShowConfirmPassword($event)"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hideConfirmPassword()"
+                >
+                    <mat-icon>{{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-icon matPrefix>check</mat-icon>
+                <mat-error *ngIf="form.get('confirmPassword')!.hasError('required')">Confirmez votre mot de passe</mat-error>
+                <mat-error *ngIf="form.get('confirmPassword')!.hasError('confirmedValidator')">Les mots de passe ne correspondent pas</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="accent" type="submit" class="signup-modal-connect-btn" [disabled]="!form.valid || isLoading">
+                Créer un compte
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

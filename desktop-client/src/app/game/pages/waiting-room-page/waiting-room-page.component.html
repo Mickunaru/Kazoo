@@ -1,0 +1,14 @@
+<div id="leftWaitingView">
+    <div id="top-left-container">
+        <h1>{{ timerService.isTimerActivated ? 'La partie commence dans ' + timerService.time + 's' : 'En attente' }}</h1>
+        <div matRipple *ngIf="roomService.isGameMaster" id="room-key" (click)="copyRoomIdToClipboard()">Code du jeu: {{ roomService.roomId }}</div>
+    </div>
+    <div id="button-container">
+        <app-lock-button [isDisabled]="timerService.isTimerActivated"></app-lock-button>
+        <app-start-game-button [isDisabled]="timerService.isTimerActivated"></app-start-game-button>
+    </div>
+    <div id="participant-list">
+        <app-team-list [isDisabled]="timerService.isTimerActivated"></app-team-list>
+        <app-player-list></app-player-list>
+    </div>
+</div>

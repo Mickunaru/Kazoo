@@ -1,0 +1,42 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+app-game-pannel {
+    flex-grow: 1;
+    height: 100%;
+}
+
+app-chat-box {
+    width: 300px;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.exit-btn {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
+
+::ng-deep .surge-dialog.mat-dialog-container {
+    position: absolute !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    min-width: unset !important;
+    overflow: hidden !important;
+}
+
+::ng-deep .surge-dialog.mat-dialog-container::-webkit-scrollbar {
+    display: none !important;
+}

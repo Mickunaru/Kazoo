@@ -1,0 +1,14 @@
+<div class="main-container">
+    <div class="result-title">
+        <div class="result-prize">
+            <h1 *ngIf="prizeService.gamePrize > 0">Prix obtenu: {{ prizeService.gamePrize }}<mat-icon iconPositionEnd>paid</mat-icon></h1>
+            <h2 *ngIf="prizeService.potPrize > 0">Prix du pots: {{ prizeService.potPrize }}<mat-icon iconPositionEnd>paid</mat-icon></h2>
+        </div>
+        <mat-card *ngIf="teamService?.team?.name" appearance="outlined" [style.backgroundColor]="teamService.team?.color">
+            <mat-card-content class="team">Équipe <mat-icon>{{teamService.team?.icon}}</mat-icon> {{teamService.team?.name}}</mat-card-content>
+        </mat-card>
+        <app-leaderboard />
+    <button routerLink="/app/home" mat-raised-button class="exit-btn" color="primary">Retour à la page d'accueil →</button>
+
+    </div>
+</div>

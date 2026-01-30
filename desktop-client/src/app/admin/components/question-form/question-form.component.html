@@ -1,0 +1,157 @@
+<!--This component should be child of a mat-accordion for the best UX with material-->
+<form [formGroup]="questionFormInfo.form">
+    <mat-expansion-panel (opened)="opened = !opened" (closed)="opened = !opened" hideToggle>
+        <mat-expansion-panel-header>
+            <div class="question-container">
+                <mat-panel-title>
+                    <h4 class="question-number">{{ questionFormInfo.index + 1 }}</h4>
+                    <ng-container [ngSwitch]="questionFormInfo.form.controls.type.value">
+                        <mat-icon class="question-icon" *ngSwitchCase="questionType.MultiChoice"> interests </mat-icon>
+                        <mat-icon class="question-icon" *ngSwitchCase="questionType.OpenEnded">reorder</mat-icon>
+                        <mat-icon class="question-icon" *ngSwitchCase="questionType.Drawing">draw</mat-icon>
+                        <mat-icon class="question-icon" *ngSwitchCase="questionType.Estimation">waves</mat-icon>
+                    </ng-container>
+                    <p id="question-name" [ngClass]="{'warn-question': questionFormInfo.form.invalid}" *ngIf="!opened; else editBlock">
+                        {{ questionFormInfo.form.get('text')?.value || 'Aucune Question' }}
+                    </p>
+                    <div style="display: flex; flex-direction: column">
+                        <p *ngIf="isQuestionBank" class="last-modification-label">
+                            {{ formatDate(questionFormInfo.form.getRawValue().lastModification) }}
+                        </p>
+                        <p *ngIf="isQuestionBank && questionFormInfo.form.getRawValue().creator" class="last-modification-label">
+                            Créé par {{ questionFormInfo.form.getRawValue().creator }}
+                        </p>
+                    </div>
+                </mat-panel-title>
+                <ng-template #editBlock>
+                    <mat-form-field
+                        id="question-field"
+                        subscriptSizing="dynamic"
+                        (click)="$event.stopPropagation()"
+                        (keydown.Space)="$event.stopImmediatePropagation()"
+                    >
+                        <mat-label>Question</mat-label>
+
+                        <input #questionTextInput matInput formControlName="text" maxlength="40" (mousedown)="$event.stopPropagation()" />
+                        <mat-hint *ngIf="questionTextInput.value.length >= 40">{{ questionTextInput.value.length }}/40</mat-hint>
+                        <mat-error *ngIf="questionFormInfo.form.controls.text.hasError('required')">Une question est obligatoire</mat-error>
+                    </mat-form-field>
+                </ng-template>
+                <div class="buttons-container">
+                    <label> {{ pointsSlider.value }} Points </label>
+                    <mat-slider [max]="100" [min]="10" [step]="10" (mousedown)="$event.stopPropagation()" (click)="$event.stopPropagation()">
+                        <input matSliderThumb formControlName="points" #pointsSlider />
+                    </mat-slider>
+                    <button
+                        mat-icon-button
+                        type="button"
+                        color="primary"
+                        [matTooltip]="hasImage() ? 'Modifier une image' : 'Ajouter une image'"
+                        (click)="openImageDialog()"
+                    >
+                        <mat-icon>{{ hasImage() ? 'photo_library' : 'add_photo_alternate' }}</mat-icon>
+                    </button>
+                    <button
+                        mat-icon-button
+                        type="button"
+                        color="warn"
+                        (click)="removeQuestion()"
+                        (click)="$event.stopPropagation()"
+                        matTooltip="Supprimer la question"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button
+                        *ngIf="isQuestionBank"
+                        mat-icon-button
+                        type="button"
+                        [disabled]="!questionFormInfo.form.valid"
+                        (click)="saveQuestion()"
+                        matTooltip="Sauvegarder la question"
+                    >
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-expansion-panel-header>
+        <ng-container [ngSwitch]="this.questionFormInfo.form.controls.type.value">
+            <ng-container *ngSwitchCase="questionType.MultiChoice">
+                <mat-list cdkDropList (cdkDropListDropped)="dropMultiChoice($event)">
+                    <mat-list-item cdkDrag *ngFor="let choice of this.questionFormInfo.form.controls.choices.controls; index as choiceIndex">
+                        <app-multi-choice
+                            [form]="choice"
+                            [index]="choiceIndex"
+                            (remove)="this.questionFormInfo.form.controls.choices.removeAt($event)"
+                        ></app-multi-choice>
+                    </mat-list-item>
+                </mat-list>
+                <button
+                    mat-raised-button
+                    type="button"
+                    class="add-response-button"
+                    *ngIf="questionFormInfo.form.controls.type.value === questionType.MultiChoice"
+                    (click)="addMultiChoice()"
+                    [disabled]="questionFormInfo.form.controls.choices.length >= 4"
+                >
+                    Ajouter un choix de réponse
+                </button>
+                <mat-error *ngIf="questionFormInfo.form.hasError('arrayLength'); else elseBlock"
+                    >Une question doit avoir au moins 2 réponses.</mat-error
+                >
+                <ng-template #elseBlock>
+                    <mat-error *ngIf="questionFormInfo.form.hasError('choicesValidity')">
+                        Une question devrait avoir une réponse valide et non valide
+                    </mat-error>
+                </ng-template>
+            </ng-container>
+            <div class="estimation-block" *ngSwitchCase="questionType.Estimation">
+                <section class="estimation-row">
+                    <div class="min-max-input">
+                        <strong>Min</strong>
+                        <input type="number" min="0" step="1" (input)="clamp()" formControlName="lowerBound" />
+                    </div>
+                    <ng-template #elseBlockNotQuestionBank>
+                        <div class="min-max-input">
+                            <strong>Max</strong>
+                            <input type="number" min="1" step="1" (input)="clamp()" formControlName="upperBound" />
+                        </div>
+                    </ng-template>
+                    <mat-slider
+                        (mousedown)="$event.stopPropagation()"
+                        (click)="$event.stopPropagation()"
+                        class="slider-qre"
+                        [min]="questionFormInfo.form.controls.lowerBound.value"
+                        [max]="questionFormInfo.form.controls.upperBound.value"
+                        [disabled]="true"
+                        [step]="1"
+                    >
+                        <input [(ngModel)]="minQRE" [ngModelOptions]="{ standalone: true }" matSliderStartThumb />
+                        <input [(ngModel)]="maxQRE" [ngModelOptions]="{ standalone: true }" matSliderEndThumb />
+                    </mat-slider>
+                    <div *ngIf="false; else elseBlockNotQuestionBank" class="min-max-input test">
+                        <strong>Max</strong>
+                        <input type="number" min="1" step="1" (input)="clamp()" formControlName="upperBound" />
+                    </div>
+                </section>
+                <section class="estimation-row">
+                    <mat-form-field class="answer">
+                        <mat-label>Réponse</mat-label>
+                        <input matInput type="number" min="0" step="1" formControlName="answer" (input)="setMinMax()" />
+                    </mat-form-field>
+
+                    <h3>±</h3>
+                    <mat-form-field class="precision">
+                        <mat-label>Precision</mat-label>
+                        <input matInput type="number" min="0" step="1" formControlName="precision" (input)="setMinMax()" />
+                    </mat-form-field>
+                </section>
+                <section class="estimation-row">
+                    <mat-error *ngIf="questionFormInfo.form.hasError('answerOutOfBounds')">la réponse doit être à l'intérieur des bornes</mat-error>
+                    <mat-error *ngIf="questionFormInfo.form.hasError('lowerBoundHigherThanUpper')">La borne maximale doit être plus grande que la borne minimale</mat-error>
+                    <mat-error *ngIf="questionFormInfo.form.hasError('positiveBounds')">Les bornes doivent être positives</mat-error>
+                    <mat-error *ngIf="questionFormInfo.form.hasError('precisionTooBig')">La précision ne peut constituer plus de 25% de l'interval défini</mat-error>
+                </section>
+            </div>
+        </ng-container>
+    </mat-expansion-panel>
+</form>

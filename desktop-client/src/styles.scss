@@ -1,0 +1,164 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use 'sass:map';
+@use './app/home/pages/home-page/_home-page-theme.component.scss' as home-page;
+@use './app/chat/components/chat-theme.component' as chat;
+@use './app/game/components/answer-types/multiple-choice-answer/_multiple-choice-answer-theme.component.scss' as multiple-choice-answer;
+@use './app/shared/components/top-bar/_top-bar-theme.component.scss' as top-bar;
+@use './app/admin/components/game-row/_game-row-theme.component.scss' as game-row;
+@use './app/home/pages/start-new-game-page/_start-new-game-page-theme.component.scss' as start-new-game-page;
+@use './app/admin/components//game-bank/game-bank-theme.component.scss' as game-bank;
+@use './app/game/components/game-pannel/_game-pannel-theme.component.scss' as game-pannel;
+@use './app/game/pages/game-master-page/_game-master-page-theme.component.scss' as game-master;
+@use './app/game/components/waiting-room/player-list/player-list-theme.component.scss' as player-list;
+@use './app/game/components/waiting-room/team-list/team-list-theme.component.scss' as team-list;
+@use './app/game/components/leaderboard/leaderboard-theme.component.scss' as leaderboard;
+@use './app/game/components/interactive-player-list/_interactive-player-list-theme.component.scss' as interactive-player-list;
+@use './app/admin/components//game-editor/game-editor-theme.component.scss' as game-editor;
+@use './app/admin/components/question-form/question-form-theme.component.scss' as question-form;
+@use './app/game/pages/results-page/_results-page-theme.component.scss' as results-page;
+@use './app/shared/components/avatar-dialog/avatar-dialog-theme.component.scss' as avatar-dialog;
+@use './app/account/pages/account-page/account-page-theme.component.scss' as account-page;
+@use './app/game/components/answer-types/drawing-answer/drawing-answer-theme.component' as drawing-answer;
+@use './app/game/components/review-pop-up/review-pop-up-theme.component' as review-pop-up;
+@use './app/game/components/surge-dialog/surge-dialog-theme.component' as surge-dialog;
+// Plus imports for other components in your app.
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// default theme ////////////////////////////////////////////
+$primary-color: mat.define-palette(mat.$indigo-palette, 800);
+$accent-color: mat.define-palette(mat.$red-palette, 400);
+$gray-colors: mat.define-palette(mat.$blue-gray-palette, 50);
+$warn-color: mat.define-palette(mat.$deep-orange-palette, A400);
+
+$typography: mat.define-typography-config(
+    $font-family: 'Roboto Slab',
+);
+
+$light-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $primary-color,
+            accent: $accent-color,
+            warn: $warn-color,
+        ),
+        typography: $typography,
+    )
+);
+
+$gray: (
+    gray: $gray-colors,
+);
+
+@include mat.all-component-themes($light-theme);
+
+@include game-row.color($gray);
+@include game-pannel.color($gray);
+@include leaderboard.color($gray);
+@include game-master.color($gray);
+
+@include top-bar.color();
+@include home-page.color();
+@include start-new-game-page.color();
+@include player-list.color();
+@include team-list.color();
+@include results-page.color();
+@include avatar-dialog.color();
+@include chat.color();
+@include multiple-choice-answer.color();
+@include game-bank.color();
+@include interactive-player-list.color();
+@include game-editor.color();
+@include question-form.color();
+@include account-page.color();
+@include drawing-answer.color();
+@include review-pop-up.color();
+@include surge-dialog.color();
+
+$joker-primary-color: mat.define-palette(mat.$purple-palette, 800);
+$joker-accent-color: mat.define-palette(mat.$green-palette, 800);
+$joker-warn-color: mat.define-palette(mat.$deep-orange-palette, A400);
+
+$joker-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $joker-primary-color,
+            accent: $joker-accent-color,
+            warn: $joker-warn-color,
+        ),
+        typography: $typography,
+    )
+);
+
+.joker-theme {
+    @include mat.all-component-colors($joker-theme);
+}
+
+$shamrock-primary-color: mat.define-palette(mat.$green-palette, 800);
+$shamrock-accent-color: mat.define-palette(mat.$amber-palette, 600);
+$shamrock-warn-color: mat.define-palette(mat.$deep-orange-palette, A400);
+
+$shamrock-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $shamrock-primary-color,
+            accent: $shamrock-accent-color,
+            warn: $shamrock-warn-color,
+        ),
+        typography: $typography,
+    )
+);
+
+.shamrock-theme {
+    @include mat.all-component-colors($shamrock-theme);
+}
+
+:root {
+    --gray: #{mat.get-color-from-palette($gray-colors)};
+
+    --primary-color: #283593;
+    --primary-contrast-color: #ffffff;
+    --primary-light-color: #b9c6e7;
+    --almost-primary-color: #3f51b5;
+
+    --accent-color: #f44336;
+    --accent-contrast-color: #ffffff;
+    --accent-light-color: #ffcdd2;
+    --almost-accent-color: #eb655b;
+
+    --warn-color: #a10000;
+}
+
+// global style ////////////////////////////////////////////
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: 'Roboto Slab', Georgia, serif;
+    min-width: fit-content;
+}
+
+// don't put a comment here please
+// this works and I would like to work on actually finishing the project
+.shop-picker .avatar-preview,.shop-picker .avatar-picker {
+    width: 22vh !important;
+    height: 22vh !important;
+}
+
+// see above
+.account-picker .avatar-preview, .account-picker .avatar-picker {
+    width: 15vh !important;
+    height: 15vh !important;
+}
+
+
+
+.mat-toolbar p {
+    color: var(--accent-contrast-color) !important;
+}

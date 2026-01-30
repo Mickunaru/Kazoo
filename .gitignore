@@ -1,0 +1,20 @@
+#ignoring .vscode folder but we keep some files for debuging
+/.vscode/chrome
+/.vs/
+
+package-lock.json
+.DS_Store
+
+# Code Coverage Folder
+coverage/
+
+#Node Modules
+/node_modules
+
+#Des trucs pour du lint extra
+sonar-project.properties
+
+#Electron out folder
+out/
+
+*.asar

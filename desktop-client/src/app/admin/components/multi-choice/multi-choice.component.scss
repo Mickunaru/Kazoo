@@ -1,0 +1,19 @@
+.multichoice-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 8px;
+    column-gap: 8px;
+}
+
+.multichoice-container .mat-mdc-form-field {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

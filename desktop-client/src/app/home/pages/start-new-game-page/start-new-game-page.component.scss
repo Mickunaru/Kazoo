@@ -1,0 +1,82 @@
+.page-title {
+    padding: 5px;
+    text-align: center;
+}
+
+h1,
+h2 {
+    margin: 8px;
+}
+
+body {
+    height: calc(100% - 64px);
+}
+
+main {
+    height: calc(100vh - 64px);
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;        
+}
+
+.game-list-card,
+.game-information {
+    flex: 1;
+    border: 1px solid;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.games-unavailable-text {
+    text-align: center;
+}
+
+.game-list-card {
+    max-height: 420px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 350px;
+}
+
+.game-list-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.game-list-card::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.game-list-card::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.game-selection,
+.game-details {
+    padding: 10px;
+}
+
+.game-details {
+    margin-top: 48px;
+}
+
+.game-list-card button {
+    width: calc(100% - 10px);
+    font-size: 20px;
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+}
+
+.game-option {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    padding-block-end: 45px;
+    border-radius: 10px;
+}

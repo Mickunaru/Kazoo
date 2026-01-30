@@ -1,0 +1,4 @@
+enum CanvasShape {
+  rectangle,
+  circle,
+}

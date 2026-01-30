@@ -1,0 +1,34 @@
+<div class="container">
+    <div
+        class="multiple-choice-container"
+        [ngClass]="{
+            'layout-2-buttons': gameStateService.questionChoices.length === 2,
+            'layout-3-buttons': gameStateService.questionChoices.length === 3
+        }"
+    >
+        <button
+            type="button"
+            *ngFor="
+                let i of powerUpService.tornadoShuffledIndexes.length !== 0 ? powerUpService.tornadoShuffledIndexes : gameStateService.questionIndexes
+            "
+            (click)="!gameStateService.isSubmitted ? submitManagerService.buttonWasClicked(i) : null"
+            class="answer-choices"
+            [ngClass]="{
+                clicked: submitManagerService.buttonsAreActive[i],
+                'show-answer-color': showAnswers && gameStateService.currentQuestion.choices[i].isCorrect,
+                'show-answer-color-wrong': showAnswers && !gameStateService.currentQuestion.choices[i].isCorrect,
+            }"
+            [disabled]="!canAnswer || submitManagerService.disabledAnswerChoices.has(i)"
+        >
+            <mat-icon>{{ buttonIcons[i] }}</mat-icon>
+            <span>{{
+                i +
+                    1 +
+                    '. ' +
+                    (powerUpService.confusionQuestionChoices.length === 0
+                        ? gameStateService.questionChoices[i]
+                        : powerUpService.confusionQuestionChoices[i].text)
+            }}</span>
+        </button>
+    </div>
+</div>

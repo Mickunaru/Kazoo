@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 500px;
+    min-width: 500px;
+    gap: 10px;
+}
+
+img {
+    height: 90%;
+    width: auto;
+}
+
+.dialog-title {
+    display: flex;
+    align-items: center;
+}
+
+.dialog-close {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}

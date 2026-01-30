@@ -1,0 +1,16 @@
+<form [formGroup]="form">
+    <div class="multichoice-container">
+        <mat-form-field subscriptSizing="dynamic" (click)="$event.stopPropagation()">
+            <mat-label>Réponse {{ index + 1 }}</mat-label>
+            <input matInput formControlName="answerText" #answerInput maxlength="30" formControlName="text" />
+            <mat-hint *ngIf="answerInput.value.length >= 20">{{ answerInput.value.length }}/30</mat-hint>
+            <mat-error *ngIf="form.controls.text.hasError('required')">La réponse est obligatoire</mat-error>
+        </mat-form-field>
+        <div class="buttons-container">
+            <mat-slide-toggle formControlName="isCorrect" color="primary"> Validité </mat-slide-toggle>
+            <button mat-icon-button type="button" color="warn" matTooltip="Supprimer la réponse" (click)="removeMultiChoice()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+</form>

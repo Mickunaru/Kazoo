@@ -1,0 +1,5 @@
+@mixin color() {
+    .player-drawing {
+        border: 4px solid var(--accent-light-color);
+    }
+}

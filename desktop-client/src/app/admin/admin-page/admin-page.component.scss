@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+}
+
+:host {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+app-game-bank,
+app-questions-bank {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    width: min-content;
+}
+
+app-game-editor {
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.toggle-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+button {
+    width: 100px;
+}
+
+.tongue-button-left {
+    border-radius: 0 25px 25px 0;
+    margin-right: 10px;
+}
+
+.tongue-button-right {
+    border-radius: 25px 0 0 25px;
+    margin-left: 10px;
+}
+
+.mdc-button.tongue-button-left,
+.mdc-button.tongue-button-right {
+    height: 50px;
+}
+
+button mat-icon {
+    font-size: 22px;
+}
+
+.page-center {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+}

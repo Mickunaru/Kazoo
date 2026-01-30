@@ -1,0 +1,25 @@
+.players-drawings-pop-up-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 8px;
+}
+
+h3 {
+    padding: 10px;
+}
+
+img.player-drawing {
+    width: 750px;
+    height: 500px;
+    aspect-ratio: 3/2;
+    border-radius: 10px;
+}
+
+.players-drawings-button-container {
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

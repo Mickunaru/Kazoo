@@ -1,0 +1,28 @@
+<div class="container">
+    <mat-form-field class="estimation-input">
+        <mat-label>Réponse</mat-label>
+        <input
+            matInput
+            type="number"
+            [disabled]="!canAnswer"
+            [min]="gameStateService.currentQuestion.lowerBound ?? 0"
+            [max]="gameStateService.currentQuestion.upperBound ?? 0"
+            [step]="1"
+            [(ngModel)]="submitManagerService.numericalAnswer"
+        />
+    </mat-form-field>
+    <h3>Précision acceptée : ±{{ gameStateService.currentQuestion.precision }}</h3>
+    <div class="slider-container">
+        <h4>{{ gameStateService.currentQuestion.lowerBound }}</h4>
+        <mat-slider
+            class="slider"
+            [disabled]="!canAnswer"
+            [min]="gameStateService.currentQuestion.lowerBound"
+            [max]="gameStateService.currentQuestion.upperBound"
+            [step]="1"
+        >
+            <input matSliderThumb [(ngModel)]="submitManagerService.numericalAnswer" />
+        </mat-slider>
+        <h4>{{ gameStateService.currentQuestion.upperBound }}</h4>
+    </div>
+</div>

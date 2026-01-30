@@ -1,0 +1,297 @@
+# === Anchors ==============================================
+.only-refs:
+    only:
+        refs:
+            - merge_requests
+
+.no-draft:
+    except:
+        variables:
+            - '$CI_MERGE_REQUEST_TITLE =~ /^Draft:/'
+
+.only-client:
+    image: registry.gitlab.com/nikolayradoev/docker-images/chrome-mongo-node:20233
+    extends: [.only-refs, .no-draft]
+    before_script:
+        - cd desktop-client
+    only:
+        changes:
+            - desktop-client/**/*
+            - common/**/*
+    cache:
+        key:
+            files:
+                - desktop-client/package-lock.json
+        paths:
+            - desktop-client/node_modules/
+        policy: pull
+
+.only-server:
+    image: registry.gitlab.com/nikolayradoev/docker-images/chrome-mongo-node:20233
+    extends: [.only-refs, .no-draft]
+    before_script:
+        - cd server
+    only:
+        changes:
+            - server/**/*
+            - common/**/*
+    cache:
+        key:
+            files:
+                - server/package-lock.json
+        paths:
+            - server/node_modules/
+        policy: pull
+
+.only-client-mobile:
+    image: instrumentisto/flutter
+    extends: [.only-refs, .no-draft]
+    before_script:
+        - export PUB_CACHE=$CI_PROJECT_DIR/.pub-cache
+        - export PATH="$PATH":"$PUB_CACHE/bin"
+        - cd mobile_client
+        - flutter pub get
+    only:
+        changes:
+            - mobile_client/**/*
+    cache:
+        key:
+            files:
+                - mobile_client/pubspec.lock
+        paths:
+            - $CI_PROJECT_DIR/.pub-cache/
+        policy: pull
+# === Stages ===============================================
+stages:
+    - install
+    - lint
+    - test
+    - deploy
+# === Install ==============================================
+install:client-desktop:
+    stage: install
+    extends: [.only-client]
+    script:
+        - npm ci
+    cache:
+        policy: push
+
+install:server:
+    stage: install
+    extends: [.only-server]
+    script:
+        - npm ci
+    cache:
+        policy: push
+
+install:client-mobile:
+    stage: install
+    extends: [.only-client-mobile]
+    script:
+        - flutter pub get
+    cache:
+        policy: push
+install:dummy-job:
+    stage: install
+    script:
+        - echo 'Dummy Job to make pipeline start when no jobs'
+    rules:
+        - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
+# === Lint ==============================================
+lint:client-desktop:
+    stage: lint
+    extends: [.only-client]
+    script:
+        - npm run lint
+    needs:
+        - job: 'install:client-desktop'
+          optional: true
+    allow_failure: true
+
+lint:server:
+    stage: lint
+    extends: [.only-server]
+    script:
+        - npm run lint
+    needs:
+        - job: 'install:server'
+          optional: true
+    allow_failure: true
+lint:client-mobile:
+    stage: lint
+    extends: [.only-client-mobile]
+    script:
+        - flutter analyze
+    needs:
+        - job: 'install:client-mobile'
+          optional: true
+    allow_failure: true
+# === Test ==============================================
+test:client:
+    stage: test
+    extends: [.only-client]
+    script:
+        - Xvfb :99 -ac -screen 0 1920x1080x24 &
+        - npm run coverage -- --browsers=ChromeHeadlessNoSandbox --watch=false
+    cache:
+        policy: pull-push
+    needs:
+        - job: 'install:client-desktop'
+          optional: true
+    artifacts:
+        paths:
+            - desktop-client/coverage/
+
+test:server:
+    stage: test
+    extends: [.only-server]
+    script:
+        - npm run coverage
+    cache:
+        policy: pull-push
+    needs:
+        - job: 'install:server'
+          optional: true
+    artifacts:
+        paths:
+            - server/coverage/
+
+test:client-mobile:
+    stage: test
+    extends: [.only-client-mobile]
+    script:
+        - flutter test
+    cache:
+        policy: pull-push
+    needs:
+        - job: 'install:client-mobile'
+          optional: true
+
+    # === Build ==============================================
+# build:electron:
+#     stage: build
+#     needs: ['install:client-desktop']
+#     <<: *only-client-desktop
+#     script:
+#         - cd desktop-client
+#         - npm run electron:prod -- --no-sandbox
+# Pages ====================================================
+pages:
+    stage: deploy
+    rules:
+        - if: '$CI_COMMIT_TAG =~ /deploy/'
+          when: manual
+    script:
+        - cd desktop-client
+        - npm ci --cache .npm --prefer-offline
+        - npm run deploy -- --base-href $BASE_HREF
+        - mkdir ../public
+        - mv dist/desktop-client/* ../public/
+    artifacts:
+        paths:
+            - public
+# Deploy ===================================================
+variables:
+    EC2_USER: ec2-user
+    ORIGIN: 'https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}'
+
+deploy:server:
+    stage: deploy
+    rules:
+        - if: '$CI_COMMIT_TAG =~ /deploy/'
+          when: manual
+    script:
+        - 'which ssh-agent || (apt-get update -qq && apt-get install -qq openssh-client )'
+        - eval $(ssh-agent -s)
+        - ssh-add <(echo "$EC2_PEM_FILE_CONTENT")
+        - mkdir -p ~/.ssh
+        - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+        - |
+            timeout 600 ssh -t -oStrictHostKeyChecking=no -o ServerAliveInterval=15 -o ServerAliveCountMax=5 "${EC2_USER}@${EC2_HOST}" "
+                set -e
+
+                echo 'Update repository cache'
+                sudo yum update -y
+
+                echo 'Setting up swap memory'
+                if test -f '/swapfile'
+                then
+                    echo 'swap memory is already configured, skipping...'
+                else
+                    sudo dd if=/dev/zero of=/swapfile bs=128M count=16
+                    sudo chmod 600 /swapfile
+                    sudo mkswap -f /swapfile
+                    sudo swapon /swapfile
+                    echo '/swapfile swap swap defaults 0 0' | sudo tee -a /etc/fstab
+                fi
+
+                echo 'Setting up git'
+                if which git &> /dev/null
+                then
+                    echo 'git is already installed, skipping...'
+                else
+                    sudo yum install -y git
+                fi
+
+                echo 'Setting up node'
+                if which node &> /dev/null
+                then
+                    echo 'node is already installed, skipping...'
+                else
+                    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+                    source ~/.nvm/nvm.sh
+                    nvm install 18
+                    nvm alias default 18
+                fi
+
+                echo 'Setting up forever'
+                if which forever &> /dev/null
+                then
+                    echo 'forever is already installed, skipping...'
+                else
+                    npm install forever -g
+                fi
+
+                echo 'Setting up amazon-cloudwatch-agent'
+                if yum list installed amazon-cloudwatch-agent &> /dev/null
+                then
+                    echo 'amazon-cloudwatch-agent is already installed, skipping...'
+                else
+                    sudo yum install -y amazon-cloudwatch-agent
+                    sudo amazon-cloudwatch-agent-ctl -a start -m ec2
+                fi
+
+                set -xv
+
+                # Force kill any node app or any app running on the server port
+                forever stopall && sudo fuser -k '${SERVER_PORT}/tcp' && sudo killall node
+
+                # Clone the repository
+                git clone ${ORIGIN} repo || echo Git repository already exist
+                cd repo
+
+                # Update the remote origin
+                # This action is important because the CI_JOB_TOKEN become invalid after each pipeline
+                git remote remove origin
+                git remote add origin ${ORIGIN}
+
+                # Checkout to the targeted commit
+                git fetch --all
+                git checkout ${CI_COMMIT_SHA}
+
+                # Build the project
+                cd server
+                npm ci
+                npm run build
+
+                # Create /var/log/messages file if not exists
+                [[ -f /var/log/messages ]] || sudo touch /var/log/messages
+                sudo chmod 777 /var/log/messages
+
+                # Refresh amazon-cloudwatch-agent config
+                sudo amazon-cloudwatch-agent-ctl -a fetch-config -s -m ec2 -c file:../amazon-cloudwatch-agent-config.json
+
+                # Launch the server in background and append output to /var/log/messages for CloudWatch
+                PORT=${SERVER_PORT} forever start -a -l /var/log/messages out/server/app/index.js
+            "
