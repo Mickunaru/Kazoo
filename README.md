@@ -1,10 +1,33 @@
+# Kazoo
+
+---
+
+## Aperçu
+
+**Projet 3 - 3e année du Baccalauréat en Génie Logiciel**
+
+_LOG3900 - Projet d'intégration d'application web_
+
+_École Polytechnique de Montréal_
+
+Auteurs:
+
+- LAVERDIÈRE Émilie
+- LE Michael
+- LLERENA Enrique
+- OUELLET Zachary
+- PIERRE Yanis
+- URIZA Gabriel
+
+---
+
 # LOG2990 - Code de base
 
 Code de base à utiliser pour démarrer le développement de votre projet.
 Le code contient 2 projets séparés :
 
--   client : le site Web fait avec le cadriciel(_framework_) **Angular**.
--   serveur : le serveur dynamique bâti avec la librairie **Express** ou **NestJs** ([selon votre choix](#choix-du-serveur)).
+- client : le site Web fait avec le cadriciel(_framework_) **Angular**.
+- serveur : le serveur dynamique bâti avec la librairie **Express** ou **NestJs** ([selon votre choix](#choix-du-serveur)).
 
 # Commandes npm
 
@@ -90,11 +113,11 @@ Les tests se retrouvent dans les fichiers `*.spec.ts` dans le code source des de
 
 Les commandes pour lancer les tests et la couverture du code sont les suivantes. Il est fortement recommandé de les exécuter souvent, s'assurer que vos tests n'échouent pas et, le cas échéant, corriger les problèmes soulevés par les tests.
 
--   Exécuter `npm run test` pour lancer les tests unitaires.
+- Exécuter `npm run test` pour lancer les tests unitaires.
 
--   Exécuter `npm run coverage` pour générer un rapport de couverture de code.
-    -   Un rapport sera généré dans la sortie de la console.
-    -   Un rapport détaillé sera généré dans le répertoire `/coverage` sous la forme d'une page web. Vous pouvez ouvrir le fichier `index.html` dans votre navigateur et naviguer à travers le rapport. Vous verrez les lignes de code non couvertes par les tests.
+- Exécuter `npm run coverage` pour générer un rapport de couverture de code.
+    - Un rapport sera généré dans la sortie de la console.
+    - Un rapport détaillé sera généré dans le répertoire `/coverage` sous la forme d'une page web. Vous pouvez ouvrir le fichier `index.html` dans votre navigateur et naviguer à travers le rapport. Vous verrez les lignes de code non couvertes par les tests.
 
 ## Linter et règles d'assurance qualité
 
@@ -191,8 +214,8 @@ Utilisez une branche commune de développement (nommée `dev` ou `develop`) dans
 
 Les branches doivent avoir une nomenclature standardisée. Voici des exemples :
 
--   Une branche de fonctionnalité devrait se nommer `feature/nom-du-feature`.
--   Une branche de correction de bogue devrait se nommer `hotfix/nom-du-bug`.
+- Une branche de fonctionnalité devrait se nommer `feature/nom-du-feature`.
+- Une branche de correction de bogue devrait se nommer `hotfix/nom-du-bug`.
 
 Les messages de commit doivent être concis et significatifs. Ne mettez pas des messages trop longs ou trop courts. **On devrait être capable de comprendre ce que le commit fait avec le message seulement sans lire les changements**.
 
